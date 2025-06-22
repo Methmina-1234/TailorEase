@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Root layout using ConstraintLayout for flexible UI design -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"> <!-- Sets a drawable background image -->
+
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/btnLogin"
+    android:layout_width="130dp"
+    android:layout_height="130dp"
+    android:backgroundTint="#F7B055"
+    android:text="Login"
+    android:textSize="30sp"
+    android:fontFamily="@font/my_font"
+    android:textColor="@color/ic_launcher_background"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.498"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.170" /> <!-- Positioned near top vertically -->
+
+    <!-- New Account Button -->
+    <Button
+        android:id="@+id/btnNewAccount"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:backgroundTint="#F7B055"
+        android:text="New Account"
+        android:textSize="20sp"
+        android:fontFamily="@font/my_font"
+        android:textColor="@color/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" /> <!-- Center of screen vertically -->
+
+    <!-- Guest Button -->
+    <Button
+        android:id="@+id/btnGuest"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:backgroundTint="#F7B055"
+        android:text="Guest"
+        android:textSize="25sp"
+        android:fontFamily="@font/my_font"
+        android:textColor="@color/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.830" /> <!-- Positioned near bottom vertically -->
+
+    <!-- Horizontal Guideline (can help align views vertically) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <!-- Vertical Guideline (can help align views horizontally) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

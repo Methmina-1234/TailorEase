@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:padding="24dp"
+    tools:context=".LoginScreen">
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="350dp"
+        android:layout_height="652dp"
+        android:background="@drawable/rounded_bg"
+        android:clipToOutline="true"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.497" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_border1"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/pic_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.182" />
+
+    <TextView
+        android:layout_width="288dp"
+        android:layout_height="330dp"
+        android:background="@drawable/rounded_bg"
+        android:fontFamily="@font/my_font"
+        android:padding="24dp"
+        android:text="TailorEase is your ultimate tailoring companion bringing expert craftsmanship, style, and convenience right to your fingertips. Explore stunning designs, customize your outfits, place orders, and track progress all from your mobile device. Whether it’s for everyday wear or a special occasion, TailorEase makes personalized fashion effortless and accessible."
+        android:textColor="#F6B056"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.713" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

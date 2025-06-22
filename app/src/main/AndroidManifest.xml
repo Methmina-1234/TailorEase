@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TailorEase"
+        tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD2DiHHDv6pKgor5_GJyyp-RdRxqWVrJWg" />
+
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Design.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".MainActivity"/>
+
+        <activity android:name=".LoginScreen"/>
+
+        <activity android:name=".LoginActivity"/>
+
+        <activity android:name=".RegisterActivity"/>
+
+        <activity android:name=".HomeActivity"/>
+
+        <activity android:name=".CustomizeActivity" />
+
+        <activity android:name=".ReadymadeActivity" />
+
+        <activity android:name=".MaterialActivity" />
+
+        <activity android:name=".ContactActivity" />
+
+        <activity android:name=".MapsActivity" />
+
+        <activity android:name=".AboutActivity" />
+
+        <activity android:name=".OrderActivity" />
+
+
+
+    </application>
+
+</manifest>
