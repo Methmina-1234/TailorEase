@@ -8,54 +8,120 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "TailorEase.db";
-    public static final String TABLE_NAME = "users";
-    public static final String COL_1 = "ID";
-    public static final String COL_2 = "username";
-    public static final String COL_3 = "email";
-    public static final String COL_4 = "password";
-    public static final String COL_5 = "use_fingerprint";  // ✅ new column
+    // DB config
+    private static final String DATABASE_NAME = "TailorEase.db";
+    private static final int DATABASE_VERSION = 3; // ⬅ bumped to 3 to ensure upgrade triggers
+
+    // Table: users
+    public static final String TABLE_USERS = "users";
+    public static final String COL_ID = "ID";
+    public static final String COL_USERNAME = "username";
+    public static final String COL_EMAIL = "email";
+    public static final String COL_PASSWORD = "password";
+    public static final String COL_USE_FINGERPRINT = "use_fingerprint";
+
+    // Table: ClothingPrices
+    public static final String TABLE_CLOTHING = "ClothingPrices";
+    public static final String COL_GENDER = "Gender";
+    public static final String COL_TYPE = "Type";
+    public static final String COL_SIZE = "Size";
+    public static final String COL_MATERIAL = "Material";
+    public static final String COL_PRICE = "Price";
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 2); // ⬅ Updated version to 2 to trigger onUpgrade
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(
-                "CREATE TABLE " + TABLE_NAME + " (" +
-                        COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COL_2 + " TEXT, " +
-                        COL_3 + " TEXT, " +
-                        COL_4 + " TEXT, " +
-                        COL_5 + " INTEGER DEFAULT 0)"
-        );
+        // Create users table
+        String createUsersTable = "CREATE TABLE IF NOT EXISTS " + TABLE_USERS + " (" +
+                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COL_USERNAME + " TEXT, " +
+                COL_EMAIL + " TEXT, " +
+                COL_PASSWORD + " TEXT, " +
+                COL_USE_FINGERPRINT + " INTEGER DEFAULT 0)";
+        db.execSQL(createUsersTable);
+
+        // Create clothing prices table
+        String createClothingTable = "CREATE TABLE IF NOT EXISTS " + TABLE_CLOTHING + " (" +
+                COL_GENDER + " TEXT, " +
+                COL_TYPE + " TEXT, " +
+                COL_SIZE + " TEXT, " +
+                COL_MATERIAL + " TEXT, " +
+                COL_PRICE + " INTEGER)";
+        db.execSQL(createClothingTable);
+
+        // Insert sample data
+        insertSampleClothingData(db);
+    }
+
+    private void insertSampleClothingData(SQLiteDatabase db) {
+        // Only insert if table is empty
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_CLOTHING, null);
+        if (cursor.moveToFirst() && cursor.getInt(0) == 0) {
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Male', 'T-Shirt', 'Small', 'Cotton', 1300)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Male', 'T-Shirt', 'Large', 'Cotton', 1600)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Male', 'Shirt', 'Medium', 'Linen', 2000)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Male', 'Trousers', 'Medium', 'Denim', 1700)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Male', 'Blazer', 'XL', 'Wool', 4500)");
+
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Female', 'Lady Dress', 'Medium', 'Cotton', 3000)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Female', 'Lady Dress', 'XL', 'Silk', 3500)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Female', 'T-Shirt', 'Medium', 'Cotton', 1400)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Female', 'Skirt', 'Large', 'Denim', 2200)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Female', 'Blazer', 'Large', 'Silk', 4200)");
+
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Kids', 'Kid Dress', 'Medium', 'Cotton', 950)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Kids', 'T-Shirt', 'Small', 'Polyester', 700)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Kids', 'Shorts', 'Medium', 'Denim', 800)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Kids', 'Shirt', 'Large', 'Linen', 1000)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Kids', 'Trousers', 'Small', 'Cotton', 850)");
+
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Male', 'Kurta', 'XL', 'Cotton', 1900)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Female', 'Saree Blouse', 'Medium', 'Silk', 1600)");
+            db.execSQL("INSERT INTO " + TABLE_CLOTHING + " VALUES ('Kids', 'Frock', 'Small', 'Net', 1100)");
+
+        }
+        cursor.close();
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Only upgrade if version is less than 2
+        // Add fingerprint column if missing
         if (oldVersion < 2) {
-            db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + COL_5 + " INTEGER DEFAULT 0");
+            db.execSQL("ALTER TABLE " + TABLE_USERS + " ADD COLUMN " + COL_USE_FINGERPRINT + " INTEGER DEFAULT 0");
+        }
+
+        // Ensure clothing table exists
+        if (oldVersion < 3) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_CLOTHING + " (" +
+                    COL_GENDER + " TEXT, " +
+                    COL_TYPE + " TEXT, " +
+                    COL_SIZE + " TEXT, " +
+                    COL_MATERIAL + " TEXT, " +
+                    COL_PRICE + " INTEGER)");
+            insertSampleClothingData(db);
         }
     }
 
-    // ✅ Updated method to include fingerprint preference
+    // 👤 User Methods
     public boolean insertUser(String username, String email, String password, boolean useFingerprint) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COL_2, username);
-        values.put(COL_3, email);
-        values.put(COL_4, password);
-        values.put(COL_5, useFingerprint ? 1 : 0); // ✅ Store fingerprint flag
-        long result = db.insert(TABLE_NAME, null, values);
+        values.put(COL_USERNAME, username);
+        values.put(COL_EMAIL, email);
+        values.put(COL_PASSWORD, password);
+        values.put(COL_USE_FINGERPRINT, useFingerprint ? 1 : 0);
+        long result = db.insert(TABLE_USERS, null, values);
         return result != -1;
     }
 
     public boolean userExists(String username, String email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE username = ? OR email = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{username, email});
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_USERS + " WHERE " + COL_USERNAME + "=? OR " + COL_EMAIL + "=?",
+                new String[]{username, email});
         boolean exists = cursor.getCount() > 0;
         cursor.close();
         return exists;
@@ -63,23 +129,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public boolean checkUser(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE username = ? AND password = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{username, password});
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + TABLE_USERS + " WHERE " + COL_USERNAME + "=? AND " + COL_PASSWORD + "=?",
+                new String[]{username, password});
         boolean valid = cursor.getCount() > 0;
         cursor.close();
         return valid;
     }
 
-    // ✅ Method to check if fingerprint login is enabled for a user
     public boolean isFingerprintEnabled(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT " + COL_5 + " FROM " + TABLE_NAME + " WHERE username = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{username});
+        Cursor cursor = db.rawQuery(
+                "SELECT " + COL_USE_FINGERPRINT + " FROM " + TABLE_USERS + " WHERE " + COL_USERNAME + "=?",
+                new String[]{username});
         boolean enabled = false;
         if (cursor.moveToFirst()) {
             enabled = cursor.getInt(0) == 1;
         }
         cursor.close();
         return enabled;
+    }
+
+    // 🧵 Clothing Price Lookup
+    public int getPrice(String gender, String type, String size, String material) {
+        int price = -1;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            cursor = db.rawQuery(
+                    "SELECT " + COL_PRICE + " FROM " + TABLE_CLOTHING +
+                            " WHERE " + COL_GENDER + "=? AND " + COL_TYPE + "=? AND " +
+                            COL_SIZE + "=? AND " + COL_MATERIAL + "=?",
+                    new String[]{gender, type, size, material});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                price = cursor.getInt(0);
+            }
+        } finally {
+            if (cursor != null) cursor.close();
+        }
+
+        return price;
     }
 }

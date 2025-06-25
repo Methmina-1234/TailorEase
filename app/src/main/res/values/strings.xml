@@ -4,4 +4,30 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
+
+    <string-array name="clothing_types">
+        <item>Trousers</item>
+        <item>T-Shirt</item>
+        <item>Shirt</item>
+        <item>Lady Dress</item>
+        <item>Blazers</item>
+        <item>Kid Dress</item>
+        <item>Shorts</item>
+        <item>Kurta</item>
+        <item>Saree Blouse</item>
+        <item>Frock</item>
+        <item>Bag</item>
+    </string-array>
+
+    <string-array name="material_types">
+        <item>Cotton</item>
+        <item>Linen</item>
+        <item>Silk</item>
+        <item>Denim</item>
+        <item>Polyester</item>
+        <item>Wool</item>
+        <item>Net</item>
+    </string-array>
+
+
 </resources>
