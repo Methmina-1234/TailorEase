@@ -12,8 +12,8 @@
 
     <ImageButton
         android:id="@+id/imageButton8"
-        android:layout_width="142dp"
-        android:layout_height="151dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:background="@drawable/rounded_border1"
         android:clipToOutline="true"
@@ -22,11 +22,13 @@
         android:scaleType="fitXY"
         android:src="@drawable/pic_8"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintVertical_bias="0.170"
+        app:layout_constraintWidth_percent="0.45" />
 
     <TextView
         android:id="@+id/textView9"
@@ -46,8 +48,8 @@
 
     <ImageButton
         android:id="@+id/imageButton9"
-        android:layout_width="142dp"
-        android:layout_height="151dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:background="@drawable/rounded_border1"
         android:clipToOutline="true"
@@ -56,11 +58,13 @@
         android:scaleType="fitXY"
         android:src="@drawable/pic_9"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintVertical_bias="0.170"
+        app:layout_constraintWidth_percent="0.45" />
 
     <TextView
         android:id="@+id/textView10"
@@ -76,23 +80,25 @@
         app:layout_constraintStart_toStartOf="@+id/imageButton9"
         app:layout_constraintTop_toTopOf="@+id/imageButton9" />
 
+
     <ImageButton
         android:id="@+id/imageButton11"
-        android:layout_width="142dp"
-        android:layout_height="151dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
-        android:background="@drawable/rounded_border1"
+        android:background="@drawable/rounded_border3"
         android:clipToOutline="true"
         android:contentDescription="Image button"
         android:padding="8dp"
         android:scaleType="fitXY"
         android:src="@drawable/pic_11"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.45" />
 
     <TextView
         android:id="@+id/textView12"
@@ -110,8 +116,8 @@
 
     <ImageButton
         android:id="@+id/imageButton10"
-        android:layout_width="142dp"
-        android:layout_height="151dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:background="@drawable/rounded_border1"
         android:clipToOutline="true"
@@ -120,10 +126,12 @@
         android:scaleType="fitXY"
         android:src="@drawable/pic_10"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintHorizontal_bias="0.00"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.45" />
 
     <TextView
         android:id="@+id/textView11"
@@ -141,8 +149,8 @@
 
     <ImageButton
         android:id="@+id/imageButton13"
-        android:layout_width="142dp"
-        android:layout_height="151dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:background="@drawable/rounded_border1"
         android:clipToOutline="true"
@@ -151,11 +159,13 @@
         android:scaleType="fitXY"
         android:src="@drawable/pic_13"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.891"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.887" />
+        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintWidth_percent="0.45" />
 
     <TextView
         android:id="@+id/textView14"
@@ -173,8 +183,8 @@
 
     <ImageButton
         android:id="@+id/imageButton12"
-        android:layout_width="142dp"
-        android:layout_height="151dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:background="@drawable/rounded_border1"
         android:clipToOutline="true"
@@ -183,11 +193,13 @@
         android:scaleType="fitXY"
         android:src="@drawable/pic_12"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.887" />
+        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintWidth_percent="0.45" />
 
     <TextView
         android:id="@+id/textView13"

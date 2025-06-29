@@ -10,15 +10,18 @@
         android:id="@+id/btnSinhala"
         android:layout_width="115dp"
         android:layout_height="78dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="#F7B055"
         android:text="සිංහල"
         android:textColor="@color/ic_launcher_background"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.200"
+        app:layout_constraintEnd_toStartOf="@+id/btnEnglish"
+        app:layout_constraintHorizontal_bias="0.911"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.811" />
+        app:layout_constraintVertical_bias="0.805"
+        app:layout_constraintWidth_percent="0.4" />
 
     <Button
         android:id="@+id/btnEnglish"
@@ -29,43 +32,47 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.800"
+        app:layout_constraintHorizontal_bias="0.719"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.811" />
+        app:layout_constraintVertical_bias="0.809"
+        app:layout_constraintWidth_percent="0.4" />
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="255dp"
-        android:layout_height="376dp"
-        android:foregroundGravity="center"
+        android:id="@+id/imageViewLogo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/tailorease"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.222"
-        app:srcCompat="@drawable/tailorease" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="248dp"
-        android:layout_height="66dp"
-        android:text="TailorEase"
-        android:textAlignment="center"
-        android:textColor="@color/ic_launcher_background"
-        android:textSize="40dp"
-        android:fontFamily="@font/my_font"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.257"
+        app:layout_constraintWidth_percent="0.6" />
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/my_font"
+        android:text="TailorEase"
+        android:textAlignment="center"
+        android:textColor="@color/ic_launcher_background"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
+        app:layout_constraintVertical_bias="0.009" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="248dp"
-        android:layout_height="66dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/my_font"
         android:text="Your Modern Tailoring Companian"
         android:textAlignment="center"
@@ -76,13 +83,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.598" />
+        app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
+        app:layout_constraintVertical_bias="0.15" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="248dp"
-        android:layout_height="66dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/my_font"
         android:text="Choose Your Language"
         android:textAlignment="center"
@@ -91,10 +98,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.697" />
+        app:layout_constraintTop_toBottomOf="@id/imageViewLogo"
+        app:layout_constraintVertical_bias="0.302" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
