@@ -1,7 +1,9 @@
 package com.s23010167.tailorease;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +21,12 @@ public class MaterialActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_material); // Make sure activity_material.xml exists
+        setContentView(R.layout.activity_material);
 
-        // Initialize views and database helper
         materialContainer = findViewById(R.id.materialContainer);
         dbHelper = new MaterialDatabaseHelper(this);
 
-        loadMaterials(); // Load material data from SQLite database
+        loadMaterials();
     }
 
     private void loadMaterials() {
@@ -34,32 +35,36 @@ public class MaterialActivity extends AppCompatActivity {
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                // Get values from each row
                 String name = cursor.getString(cursor.getColumnIndexOrThrow(MaterialDatabaseHelper.COL_NAME));
                 String description = cursor.getString(cursor.getColumnIndexOrThrow(MaterialDatabaseHelper.COL_DESCRIPTION));
                 String imageResName = cursor.getString(cursor.getColumnIndexOrThrow(MaterialDatabaseHelper.COL_IMAGE));
+                String url = cursor.getString(cursor.getColumnIndexOrThrow(MaterialDatabaseHelper.COL_URL)); // Get URL
 
-                // Resolve image resource ID from drawable name
+                // Resolve image resource ID
                 int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
+                if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;
 
-                // Use default image if the resource is not found
-                if (imageResId == 0) {
-                    imageResId = R.drawable.pic_14; // Add this to res/drawable
-                }
-
-                // Inflate material_box layout for each material item
+                // Inflate material layout
                 View materialBox = LayoutInflater.from(this).inflate(R.layout.material_box, materialContainer, false);
 
-                // Populate the layout with material data
+                // Bind views
                 ImageView image = materialBox.findViewById(R.id.imageView);
                 TextView title = materialBox.findViewById(R.id.textViewTitle);
                 TextView desc = materialBox.findViewById(R.id.textViewDescription);
+                TextView more = materialBox.findViewById(R.id.textViewMore); // This must exist in your XML
 
                 image.setImageResource(imageResId);
                 title.setText(name);
                 desc.setText(description);
 
-                // Add the material box to the container
+                // Open web browser on "More Info"
+                more.setOnClickListener(v -> {
+                    if (url != null && !url.isEmpty()) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(browserIntent);
+                    }
+                });
+
                 materialContainer.addView(materialBox);
 
             } while (cursor.moveToNext());

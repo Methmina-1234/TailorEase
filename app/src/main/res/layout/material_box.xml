@@ -9,22 +9,24 @@
     android:padding="8dp">
 
     <!-- Material Image -->
+
+
+    <!-- Material Name -->
+
+    <!-- Material Description -->
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:scaleType="fitXY"
         android:background="@drawable/rounded_border1"
-        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.35"
-        app:layout_constraintDimensionRatio="1:1" />
-
-    <!-- Material Name -->
-
-    <!-- Material Description -->
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.35" />
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -59,8 +61,23 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/textViewTitle"
         app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-        app:layout_constraintVertical_bias="0.103" />
+        app:layout_constraintVertical_bias="0.062" />
+
+    <TextView
+        android:id="@+id/textViewMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="More Info"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textStyle="bold"
+        android:paddingTop="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+        app:layout_constraintStart_toStartOf="@id/textViewDescription"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
