@@ -4,10 +4,9 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MaterialActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_material); // XML file name: activity_material.xml
+        setContentView(R.layout.activity_material); // Must match XML file name
     }
 }

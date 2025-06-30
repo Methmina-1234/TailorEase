@@ -10,16 +10,17 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="356dp"
-        android:layout_height="650dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@drawable/rounded_bg"
         android:clipToOutline="true"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.7"/>
 
 
     <fragment
