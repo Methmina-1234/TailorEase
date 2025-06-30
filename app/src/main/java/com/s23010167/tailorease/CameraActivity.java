@@ -56,7 +56,7 @@ public class CameraActivity extends AppCompatActivity {
                 sendIntent.setType("image/*");
                 sendIntent.putExtra(Intent.EXTRA_STREAM, photoUri);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, message);
-                sendIntent.putExtra("jid", phoneNumber + "@s.whatsapp.net"); // Target specific number
+                sendIntent.putExtra("jid", phoneNumber + "@s.whatsapp.pic_20.jpg"); // Target specific number
                 sendIntent.setPackage("com.whatsapp");
 
                 try {

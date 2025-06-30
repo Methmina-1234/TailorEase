@@ -31,12 +31,12 @@ public class MaterialDatabaseHelper extends SQLiteOpenHelper {
         // Sample data
         db.execSQL("INSERT INTO " + TABLE_NAME + " (name, description, image) VALUES " +
                 "('Cotton', 'Soft, breathable, and perfect for everyday wear. It is easy to wash and gentle on the skin.', 'pic_14')," +
-                "('Linen', 'Lightweight and cool, ideal for hot climates. Linen has a natural, relaxed texture.', 'pic_14')," +
-                "('Silk', 'Smooth, shiny, and luxurious. Great for formal wear and delicate garments.', 'pic_14')," +
-                "('Denim', 'Thick, durable fabric known for jeans. Offers a rugged and casual look.', 'pic_14')," +
-                "('Polyester', 'Wrinkle-resistant and long-lasting. Dries quickly and holds its shape well.', 'pic_14')," +
-                "('Wool', 'Warm and insulating, perfect for winter. Wool is soft and helps retain heat.', 'pic_14')," +
-                "('Net', 'Sheer and lightweight with an open weave. Often used in overlays and decorative fashion.', 'pic_14')");
+                "('Linen', 'Lightweight and cool, ideal for hot climates. Linen has a natural, relaxed texture.', 'pic_15')," +
+                "('Silk', 'Smooth, shiny, and luxurious. Great for formal wear and delicate garments.', 'pic_16')," +
+                "('Denim', 'Thick, durable fabric known for jeans. Offers a rugged and casual look.', 'pic_17')," +
+                "('Polyester', 'Wrinkle-resistant and long-lasting. Dries quickly and holds its shape well.', 'pic_18')," +
+                "('Wool', 'Warm and insulating, perfect for winter. Wool is soft and helps retain heat.', 'pic_19')," +
+                "('Net', 'Sheer and lightweight with an open weave. Often used in overlays and decorative fashion.', 'pic_20')");
     }
 
     @Override
