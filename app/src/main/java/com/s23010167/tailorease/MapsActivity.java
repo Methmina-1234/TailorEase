@@ -19,24 +19,37 @@ import com.google.android.gms.location.*;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
 import java.util.*;
 
+import android.graphics.Color;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    private static final String TAG = "MapsActivity";
 
     private GoogleMap mMap;
     private EditText editTextSearch;
     private Button buttonSearch;
 
-    private final LatLng myShopLocation = new LatLng(7.203352, 79.870462);
+    private final LatLng myShopLocation = new LatLng(7.203265, 79.870508);
     private FusedLocationProviderClient fusedLocationClient;
     private Location currentLocation;
 
+    private Polyline liveLocationPolyline;
+    private Polyline searchLocationPolyline;
+
+    private Marker liveLocationMarker;
+    private Marker searchLocationMarker;
+    private Marker shopMarker;
+
     private static final int LOCATION_PERMISSION_REQUEST = 1001;
+
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
+
+    // Store last searched LatLng for keeping search marker and line
+    private LatLng lastSearchedLatLng = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +64,94 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
+        } else {
+            Log.e(TAG, "Map fragment is null!");
         }
 
-        buttonSearch.setOnClickListener(v -> searchLocation());
+        // LocationRequest setup
+        locationRequest = LocationRequest.create();
+        locationRequest.setInterval(5000); // 5 seconds
+        locationRequest.setFastestInterval(2000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        // LocationCallback updates live user location and green polyline
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) return;
+
+                Location location = locationResult.getLastLocation();
+                if (location != null && mMap != null) {
+                    currentLocation = location;
+                    LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+                    // Update live location marker
+                    if (liveLocationMarker == null) {
+                        liveLocationMarker = mMap.addMarker(new MarkerOptions()
+                                .position(userLatLng)
+                                .title("Your Location")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                    } else {
+                        liveLocationMarker.setPosition(userLatLng);
+                    }
+
+                    // Update live location polyline (green)
+                    if (liveLocationPolyline != null) liveLocationPolyline.remove();
+                    PolylineOptions liveLineOptions = new PolylineOptions()
+                            .add(userLatLng)
+                            .add(myShopLocation)
+                            .width(8)
+                            .color(Color.GREEN)
+                            .geodesic(true);
+                    liveLocationPolyline = mMap.addPolyline(liveLineOptions);
+
+                    // If search location exists, also draw blue line and marker for search
+                    if (lastSearchedLatLng != null) {
+                        // Update or add search location marker
+                        if (searchLocationMarker == null) {
+                            searchLocationMarker = mMap.addMarker(new MarkerOptions()
+                                    .position(lastSearchedLatLng)
+                                    .title("Your Search")
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                        } else {
+                            searchLocationMarker.setPosition(lastSearchedLatLng);
+                        }
+
+                        // Update or add blue polyline from searched location to shop
+                        if (searchLocationPolyline != null) searchLocationPolyline.remove();
+                        PolylineOptions searchLineOptions = new PolylineOptions()
+                                .add(lastSearchedLatLng)
+                                .add(myShopLocation)
+                                .width(8)
+                                .color(Color.BLUE)
+                                .geodesic(true);
+                        searchLocationPolyline = mMap.addPolyline(searchLineOptions);
+                    }
+
+                    // Add shop marker if not added yet
+                    if (shopMarker == null) {
+                        shopMarker = mMap.addMarker(new MarkerOptions()
+                                .position(myShopLocation)
+                                .title("We are here!")
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                        if (shopMarker != null) shopMarker.showInfoWindow();
+                    }
+
+                    // Zoom to show all three markers nicely
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    builder.include(userLatLng);
+                    builder.include(myShopLocation);
+                    if (lastSearchedLatLng != null) builder.include(lastSearchedLatLng);
+
+                    // Animate camera with padding
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 150));
+                }
+            }
+        };
+
+        buttonSearch.setOnClickListener(v -> {
+            searchLocation();
+        });
     }
 
     @Override
@@ -69,27 +167,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setMyLocationEnabled(true);
 
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(location -> {
-                    if (location != null) {
-                        currentLocation = location;
-                        LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-                        addShopMarker();
-                        drawRoute(userLatLng, myShopLocation, R.color.green); // ✅ Green line
-                    }
-                });
-    }
-
-    private void addShopMarker() {
-        Marker shopMarker = mMap.addMarker(new MarkerOptions()
-                .position(myShopLocation)
-                .title("We are here!")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-
-        if (shopMarker != null) {
-            shopMarker.showInfoWindow();
+        // Add shop marker
+        if (shopMarker == null) {
+            shopMarker = mMap.addMarker(new MarkerOptions()
+                    .position(myShopLocation)
+                    .title("We are here!")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            if (shopMarker != null) shopMarker.showInfoWindow();
         }
+
+        // Move camera initially to shop location with zoom 15
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myShopLocation, 15f));
+
+        // Start live location updates
+        startLocationUpdates();
     }
 
     private void searchLocation() {
@@ -104,127 +195,75 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             List<Address> addressList = geocoder.getFromLocationName(location, 1);
             if (addressList != null && !addressList.isEmpty()) {
                 Address address = addressList.get(0);
-                LatLng searchedLatLng = new LatLng(address.getLatitude(), address.getLongitude());
+                lastSearchedLatLng = new LatLng(address.getLatitude(), address.getLongitude());
 
-                // Don't clear map — we want to keep both paths visible
-                mMap.addMarker(new MarkerOptions().position(searchedLatLng).title("Your Search"));
+                // Add or update search marker
+                if (searchLocationMarker == null) {
+                    searchLocationMarker = mMap.addMarker(new MarkerOptions()
+                            .position(lastSearchedLatLng)
+                            .title("Your Search")
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                } else {
+                    searchLocationMarker.setPosition(lastSearchedLatLng);
+                }
 
-                // ✅ Draw blue line from searched location to shop
-                drawRoute(searchedLatLng, myShopLocation, R.color.blue);
+                // Add or update blue polyline from searched location to shop
+                if (searchLocationPolyline != null) searchLocationPolyline.remove();
+                PolylineOptions searchLineOptions = new PolylineOptions()
+                        .add(lastSearchedLatLng)
+                        .add(myShopLocation)
+                        .width(8)
+                        .color(Color.BLUE)
+                        .geodesic(true);
+                searchLocationPolyline = mMap.addPolyline(searchLineOptions);
 
-                // Move camera to show searched location
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(searchedLatLng, 15f));
+                // If live location known, keep green line and marker updated (trigger a fake location callback)
+                if (currentLocation != null) {
+                    locationCallback.onLocationResult(LocationResult.create(Collections.singletonList(currentLocation)));
+                } else {
+                    // Move camera to searched location if live location not available
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastSearchedLatLng, 15f));
+                }
             } else {
                 Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT).show();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Geocoder I/O Exception", e);
             Toast.makeText(this, "Error fetching location", Toast.LENGTH_SHORT).show();
         }
     }
 
-
-    private void drawRoute(LatLng origin, LatLng destination, int colorResId) {
-        String url = getDirectionsUrl(origin, destination);
-
-        new Thread(() -> {
-            try {
-                Log.d("MAP_ROUTE", "Fetching directions: " + url);
-                URL directionUrl = new URL(url);
-                HttpURLConnection conn = (HttpURLConnection) directionUrl.openConnection();
-                conn.connect();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                StringBuilder result = new StringBuilder();
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    result.append(line);
-                }
-
-                Log.d("MAP_ROUTE", "Response: " + result.toString());
-
-                JSONObject jsonObject = new JSONObject(result.toString());
-                JSONArray routes = jsonObject.getJSONArray("routes");
-
-                if (routes.length() > 0) {
-                    JSONObject route = routes.getJSONObject(0);
-                    JSONObject polyline = route.getJSONObject("overview_polyline");
-                    String encodedPoints = polyline.getString("points");
-
-                    List<LatLng> path = decodePolyline(encodedPoints);
-
-                    Log.d("MAP_ROUTE", "Decoded path points: " + path.size());
-
-                    runOnUiThread(() -> {
-                        PolylineOptions polylineOptions = new PolylineOptions()
-                                .addAll(path)
-                                .width(10)
-                                .color(getResources().getColor(colorResId))
-                                .geodesic(true);
-                        mMap.addPolyline(polylineOptions);
-                    });
-                } else {
-                    Log.w("MAP_ROUTE", "No routes found");
-                }
-
-            } catch (Exception e) {
-                Log.e("MAP_ROUTE", "Error in drawRoute", e);
-            }
-        }).start();
-    }
-
-    private String getDirectionsUrl(LatLng origin, LatLng dest) {
-        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
-        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
-        String sensor = "sensor=false";
-        String key = "AIzaSyD2DiHHDv6pKgor5_GJyyp-RdRxqWVrJWg"; // Replace with your valid API key
-
-        return "https://maps.googleapis.com/maps/api/directions/json?" +
-                str_origin + "&" + str_dest + "&" + sensor + "&mode=driving&key=" + key;
-    }
-
-    private List<LatLng> decodePolyline(String encoded) {
-        List<LatLng> poly = new ArrayList<>();
-        int index = 0, len = encoded.length();
-        int lat = 0, lng = 0;
-
-        while (index < len) {
-            int b, shift = 0, result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlat = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lat += dlat;
-
-            shift = 0;
-            result = 0;
-            do {
-                b = encoded.charAt(index++) - 63;
-                result |= (b & 0x1f) << shift;
-                shift += 5;
-            } while (b >= 0x20);
-            int dlng = ((result & 1) != 0 ? ~(result >> 1) : (result >> 1));
-            lng += dlng;
-
-            poly.add(new LatLng(lat / 1E5, lng / 1E5));
+    private void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST);
+            return;
         }
-
-        return poly;
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
     }
 
+    private void stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback);
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == LOCATION_PERMISSION_REQUEST) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                onMapReady(mMap);
+                if (mMap != null) onMapReady(mMap);
             } else {
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopLocationUpdates();
     }
 }
