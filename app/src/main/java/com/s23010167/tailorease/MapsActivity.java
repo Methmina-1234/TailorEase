@@ -132,7 +132,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (shopMarker == null) {
                         shopMarker = mMap.addMarker(new MarkerOptions()
                                 .position(myShopLocation)
-                                .title("We are here!")
+                                .title("\uD83D\uDCCD You found us! Welcome to TailorEase \uD83D\uDC4B\uD83E\uDDF5")
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
                         if (shopMarker != null) shopMarker.showInfoWindow();
                     }
@@ -171,7 +171,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (shopMarker == null) {
             shopMarker = mMap.addMarker(new MarkerOptions()
                     .position(myShopLocation)
-                    .title("We are here!")
+                    .title("\uD83D\uDCCD You found us! Welcome to TailorEase \uD83D\uDC4B\uD83E\uDDF5")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             if (shopMarker != null) shopMarker.showInfoWindow();
         }
