@@ -26,7 +26,7 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.35" />
+        app:layout_constraintWidth_percent="0.40" />
 
     <TextView
         android:id="@+id/textViewTitle"

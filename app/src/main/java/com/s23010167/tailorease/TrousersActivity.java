@@ -39,6 +39,7 @@ public class TrousersActivity extends AppCompatActivity {
                 String name = cursor.getString(cursor.getColumnIndexOrThrow(TrousersDatabaseHelper.COL_NAME));
                 String description = cursor.getString(cursor.getColumnIndexOrThrow(TrousersDatabaseHelper.COL_DESCRIPTION));
                 String imageResName = cursor.getString(cursor.getColumnIndexOrThrow(TrousersDatabaseHelper.COL_IMAGE));
+                String measurements = cursor.getString(cursor.getColumnIndexOrThrow(TrousersDatabaseHelper.COL_MEASUREMENTS));
 
                 int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
                 if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;
@@ -52,12 +53,13 @@ public class TrousersActivity extends AppCompatActivity {
 
                 image.setImageResource(imageResId);
                 title.setText(name);
-                desc.setText(description);
+                desc.setText(description + "\n\nMeasurements: " + (measurements != null ? measurements : "N/A"));
 
                 addToCartBtn.setOnClickListener(v -> {
-                    long id = ordersDbHelper.addOrder(name, description, imageResName);
+                    // Assuming you update addOrder to accept measurements:
+                    long id = ordersDbHelper.addOrder(name, description, imageResName, measurements);
                     if (id != -1) {
-                        Toast.makeText(this, name + " added to cart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, name + " added to cart\nMeasurements: " + (measurements != null ? measurements : "N/A"), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(this, "Failed to add " + name + " to cart", Toast.LENGTH_SHORT).show();
                     }

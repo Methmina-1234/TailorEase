@@ -37,7 +37,7 @@ public class OrdersDatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Helper method to add an order
-    public long addOrder(String name, String description, String image) {
+    public long addOrder(String name, String description, String image, String measurements) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL_NAME, name);
