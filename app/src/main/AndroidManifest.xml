@@ -82,10 +82,12 @@
                 android:resource="@xml/file_paths"/>
         </provider>
 
-
-
-
-
+        <activity android:name=".TrousersActivity" />
+        <activity android:name=".TShirtActivity" />
+        <activity android:name=".LadyDressActivity" />
+        <activity android:name=".BlazerActivity" />
+        <activity android:name=".KidsDressActivity" />
+        <activity android:name=".BagsActivity" />
 
     </application>
 
