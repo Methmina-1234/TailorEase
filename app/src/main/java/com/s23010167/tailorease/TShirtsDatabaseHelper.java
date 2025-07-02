@@ -46,7 +46,19 @@ public class TShirtsDatabaseHelper extends SQLiteOpenHelper {
                 "('Shirt', 'Casual Shirt', 'Soft fabric for everyday comfort.', 'pic_shirt2', 'Chest: 36-44 in | Relaxed fit')," +
                 "('Shirt', 'Denim Shirt', 'Trendy and durable denim style.', 'pic_shirt3', 'Chest: 38-48 in | Button-down')," +
                 "('Shirt', 'Linen Shirt', 'Lightweight and breathable for hot days.', 'pic_shirt4', 'Chest: 36-44 in | Slim fit')," +
-                "('Shirt', 'Checkered Shirt', 'Classic style with checks.', 'pic_shirt5', 'Chest: 38-46 in | Long sleeve')");
+                "('Shirt', 'Checkered Shirt', 'Classic style with checks.', 'pic_shirt5', 'Chest: 38-46 in | Long sleeve'),"+
+
+                "('T-Shirt', 'Henley Tee', 'Round neckline with buttons. A casual classic.', 'pic_tshirt6', 'Chest: 36-44 in | Soft cotton blend')," +
+                "('T-Shirt', 'Muscle Fit Tee', 'Tight fit to highlight physique.', 'pic_tshirt7', 'Chest: 34-42 in | Stretch fabric')," +
+                "('T-Shirt', 'Ringer Tee', 'Contrasting sleeve and collar edges.', 'pic_tshirt8', 'Chest: 36-44 in | Retro look')," +
+                "('T-Shirt', 'Longline Tee', 'Extended length with modern urban vibe.', 'pic_tshirt9', 'Chest: 38-46 in | Extra length')," +
+                "('T-Shirt', 'Pocket Tee', 'Includes a stylish chest pocket.', 'pic_tshirt10', 'Chest: 36-44 in | Utility design')," +
+
+                "('Shirt', 'Oxford Shirt', 'Versatile classic for business and casual.', 'pic_shirt6', 'Chest: 38-46 in | Button-down collar')," +
+                "('Shirt', 'Mandarin Collar Shirt', 'Modern look with stand collar.', 'pic_shirt7', 'Chest: 36-44 in | Short sleeve')," +
+                "('Shirt', 'Flannel Shirt', 'Warm and soft. Ideal for cold weather.', 'pic_shirt8', 'Chest: 40-50 in | Thick cotton')," +
+                "('Shirt', 'Hawaiian Shirt', 'Vibrant prints for beach vibes.', 'pic_shirt9', 'Chest: 38-46 in | Lightweight fabric')," +
+                "('Shirt', 'Slim Fit Shirt', 'Tailored for a sharp and slim profile.', 'pic_shirt10', 'Chest: 36-42 in | Close cut')");        ;
     }
 
     @Override

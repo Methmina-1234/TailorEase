@@ -37,7 +37,13 @@ public class BagDatabaseHelper extends SQLiteOpenHelper {
                 "('Canvas Tote Bag', 'Casual and lightweight tote bag for everyday shopping.', 'pic_bag2', 'Height: 35cm | Width: 40cm')," +
                 "('Mini Backpack', 'Trendy mini backpack perfect for outings.', 'pic_bag3', 'Height: 30cm | Width: 20cm')," +
                 "('Sling Bag', 'Compact sling bag with adjustable strap.', 'pic_bag4', 'Height: 20cm | Width: 15cm')," +
-                "('Travel Duffel Bag', 'Spacious and durable for short trips.', 'pic_bag5', 'Length: 50cm | Width: 25cm | Height: 30cm')");
+                "('Travel Duffel Bag', 'Spacious and durable for short trips.', 'pic_bag5', 'Length: 50cm | Width: 25cm | Height: 30cm'),"+
+                "('Crossbody Bag', 'Stylish and secure bag for daily use.', 'pic_bag6', 'Height: 22cm | Width: 28cm')," +
+                "('Clutch Bag', 'Elegant evening clutch perfect for parties and events.', 'pic_bag7', 'Height: 15cm | Width: 25cm')," +
+                "('Laptop Bag', 'Professional and padded bag for carrying laptops.', 'pic_bag8', 'Fits up to 15-inch laptops')," +
+                "('Bucket Bag', 'Trendy and spacious with a drawstring closure.', 'pic_bag9', 'Height: 30cm | Width: 25cm')," +
+                "('Messenger Bag', 'Classic over-the-shoulder bag with flap.', 'pic_bag10', 'Height: 28cm | Width: 35cm')");
+
     }
 
     @Override

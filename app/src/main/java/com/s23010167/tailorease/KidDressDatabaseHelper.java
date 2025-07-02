@@ -38,7 +38,13 @@ public class KidDressDatabaseHelper extends SQLiteOpenHelper {
                 "('Casual Play Dress', 'Soft and comfy dress for everyday playtime.', 'pic_kiddress2', 'Ages: 3-7 yrs')," +
                 "('Traditional Dress', 'Ethnic style dress for cultural events and ceremonies.', 'pic_kiddress3', 'Ages: 4-10 yrs')," +
                 "('Princess Gown', 'Elegant gown with layers and lace for special occasions.', 'pic_kiddress4', 'Ages: 5-10 yrs')," +
-                "('Summer Sundress', 'Light and sleeveless dress ideal for warm weather.', 'pic_kiddress5', 'Ages: 2-6 yrs')");
+                "('Summer Sundress', 'Light and sleeveless dress ideal for warm weather.', 'pic_kiddress5', 'Ages: 2-6 yrs')," +
+
+                "('Floral Dress', 'Cute dress with flower prints for spring and summer.', 'pic_kiddress6', 'Ages: 3-8 yrs')," +
+                "('Winter Wool Dress', 'Warm and cozy for cold seasons.', 'pic_kiddress7', 'Ages: 4-9 yrs')," +
+                "('Denim Dress', 'Trendy and durable denim for stylish little ones.', 'pic_kiddress8', 'Ages: 3-7 yrs')," +
+                "('Fairy Dress', 'Magical wings and glitter design for imaginative play.', 'pic_kiddress9', 'Ages: 4-9 yrs')," +
+                "('Polka Dot Dress', 'Classic polka dots with a retro vibe.', 'pic_kiddress10', 'Ages: 2-6 yrs')");
     }
 
     @Override

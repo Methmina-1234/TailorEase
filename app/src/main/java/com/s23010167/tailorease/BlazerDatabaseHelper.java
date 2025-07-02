@@ -38,7 +38,12 @@ public class BlazerDatabaseHelper extends SQLiteOpenHelper {
                 "('Double-Breasted Blazer', 'Sophisticated style with extra buttons and wider lapels.', 'pic_blazer2', 'Chest: 40-48 in | Tailored fit')," +
                 "('Casual Blazer', 'Lightweight and versatile for smart casual looks.', 'pic_blazer3', 'Chest: 38-46 in | Soft fabric')," +
                 "('Velvet Blazer', 'Luxurious velvet finish for evening occasions.', 'pic_blazer4', 'Chest: 38-44 in | Slim fit')," +
-                "('Checked Pattern Blazer', 'Modern look with classic checkered pattern.', 'pic_blazer5', 'Chest: 38-46 in | Regular fit')");
+                "('Checked Pattern Blazer', 'Modern look with classic checkered pattern.', 'pic_blazer5', 'Chest: 38-46 in | Regular fit'),"+
+                "('Linen Blazer', 'Breathable and lightweight—perfect for summer events.', 'pic_blazer6', 'Chest: 38-46 in | Natural fabric')," +
+                "('Wool Blend Blazer', 'Warm and structured, ideal for cooler weather.', 'pic_blazer7', 'Chest: 40-50 in | Winter wear')," +
+                "('Tweed Blazer', 'Textured and stylish for a vintage vibe.', 'pic_blazer8', 'Chest: 38-46 in | Classic cut')," +
+                "('Slim Fit Blazer', 'Tailored for a sleek modern silhouette.', 'pic_blazer9', 'Chest: 36-44 in | Slim profile')," +
+                "('Peak Lapel Blazer', 'Sharp peak lapels for a bold, formal look.', 'pic_blazer10', 'Chest: 40-48 in | Sharp cut')");        ;
     }
 
     @Override
