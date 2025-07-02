@@ -27,8 +27,11 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="T-Shirts"
+            android:textSize="20dp"
+            android:fontFamily="@font/my_font"
+            android:textStyle="bold"
             android:backgroundTint="#F6B056"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/ic_launcher_background" />
 
         <Button
             android:id="@+id/btnShirts"
@@ -36,8 +39,11 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Shirts"
-            android:backgroundTint="#B0B0B0"
-            android:textColor="#FFFFFF" />
+            android:textSize="20dp"
+            android:fontFamily="@font/my_font"
+            android:textStyle="bold"
+            android:backgroundTint="@color/ic_launcher_background"
+            android:textColor="#F5AF56" />
     </LinearLayout>
 
     <ScrollView

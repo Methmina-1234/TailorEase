@@ -87,7 +87,7 @@
         <activity android:name=".LadyDressActivity" />
         <activity android:name=".BlazerActivity" />
         <activity android:name=".KidDressActivity" />
-        <activity android:name=".BagsActivity" />
+        <activity android:name=".BagActivity" />
 
     </application>
 
