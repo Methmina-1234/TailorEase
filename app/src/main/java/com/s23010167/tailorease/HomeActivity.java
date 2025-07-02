@@ -25,10 +25,11 @@ public class HomeActivity extends AppCompatActivity {
         imageButton5 = findViewById(R.id.imageButton5); // Orders
         imageButton6 = findViewById(R.id.imageButton6); // About
 
-        // Check if user is guest
+        // Set guest flag
         String userType = getIntent().getStringExtra("user_type");
-        if ("guest".equals(userType)) {
-            isGuestUser = true;
+        isGuestUser = "guest".equals(userType);
+
+        if (isGuestUser) {
             disableRestrictedFeatures();
         }
 
@@ -61,23 +62,21 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void disableRestrictedFeatures() {
-        // Dim or disable buttons that guests shouldn't use
         imageButton1.setAlpha(0.5f);
-        imageButton1.setEnabled(false);
+        imageButton1.setEnabled(true); // keep clickable to show message
 
         imageButton3.setAlpha(0.5f);
-        imageButton3.setEnabled(false);
+        imageButton3.setEnabled(true);
 
         imageButton5.setAlpha(0.5f);
-        imageButton5.setEnabled(false);
+        imageButton5.setEnabled(true);
     }
 
-    // Helper to block guest navigation attempts
     private boolean checkGuestRestriction(String featureName) {
         if (isGuestUser) {
-            Toast.makeText(this, featureName + " is disabled for guest users.", Toast.LENGTH_SHORT).show();
-            return true;  // Block navigation
+            Toast.makeText(this, featureName + " is disabled for guest users.\nPlease register to access full features.", Toast.LENGTH_LONG).show();
+            return true;
         }
-        return false; // Allow navigation
+        return false;
     }
 }
