@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
@@ -54,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_bg"
         android:fontFamily="@font/my_font"
         android:padding="4dp"
         android:text="Material Description"
@@ -70,14 +72,30 @@
         android:id="@+id/textViewMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="4dp"
         android:text="More Info"
         android:textColor="@android:color/holo_blue_dark"
         android:textStyle="bold"
-        android:paddingTop="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/textViewDescription"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textViewDescription"
+        app:layout_constraintVertical_bias="0.425" />
+
+    <TextView
+        android:id="@+id/textViewPriceIncrease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price increase info here"
+        android:textColor="#F44336"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.713"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMore"
+        app:layout_constraintVertical_bias="0.333" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

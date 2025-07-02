@@ -42,6 +42,7 @@ public class KidDressActivity extends AppCompatActivity {
                 String description = cursor.getString(cursor.getColumnIndexOrThrow(KidDressDatabaseHelper.COL_DESCRIPTION));
                 String imageResName = cursor.getString(cursor.getColumnIndexOrThrow(KidDressDatabaseHelper.COL_IMAGE));
                 String measurements = cursor.getString(cursor.getColumnIndexOrThrow(KidDressDatabaseHelper.COL_MEASUREMENTS));
+                String price = cursor.getString(cursor.getColumnIndexOrThrow(KidDressDatabaseHelper.COL_PRICE)); // ⬅️ New
 
                 int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
                 if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;
@@ -55,12 +56,16 @@ public class KidDressActivity extends AppCompatActivity {
 
                 image.setImageResource(imageResId);
                 title.setText(name);
-                desc.setText(description + "\n\nMeasurements: " + (measurements != null ? measurements : "N/A"));
+                desc.setText(
+                        description + "\n\n" +
+                                "Measurements: " + (measurements != null ? measurements : "N/A") + "\n" +
+                                "Price: " + (price != null ? price : "N/A")
+                );
 
                 addToCartBtn.setOnClickListener(v -> {
-                    long id = ordersDbHelper.addOrder(name, description, imageResName, measurements);
+                    long id = ordersDbHelper.addOrder(name, description, imageResName, measurements, price);
                     if (id != -1) {
-                        Toast.makeText(this, name + " added to cart\nMeasurements: " + measurements, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, name + " added to cart\nMeasurements: " + measurements + "\nPrice: " + price, Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(this, "Failed to add " + name + " to cart", Toast.LENGTH_SHORT).show();
                     }

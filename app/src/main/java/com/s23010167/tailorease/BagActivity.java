@@ -42,7 +42,8 @@ public class BagActivity extends AppCompatActivity {
                 String description = cursor.getString(cursor.getColumnIndexOrThrow(BagDatabaseHelper.COL_DESCRIPTION));
                 String imageResName = cursor.getString(cursor.getColumnIndexOrThrow(BagDatabaseHelper.COL_IMAGE));
                 String measurements = cursor.getString(cursor.getColumnIndexOrThrow(BagDatabaseHelper.COL_MEASUREMENTS));
-                String capacity = cursor.getString(cursor.getColumnIndexOrThrow(BagDatabaseHelper.COL_CAPACITY)); // New
+                String capacity = cursor.getString(cursor.getColumnIndexOrThrow(BagDatabaseHelper.COL_CAPACITY));
+                String price = cursor.getString(cursor.getColumnIndexOrThrow(BagDatabaseHelper.COL_PRICE)); // New
 
                 int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
                 if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;
@@ -56,14 +57,17 @@ public class BagActivity extends AppCompatActivity {
 
                 image.setImageResource(imageResId);
                 title.setText(name);
-                desc.setText(description + "\n\nMeasurements: " + (measurements != null ? measurements : "N/A") +
-                        "\nCapacity: " + (capacity != null ? capacity : "N/A")); // Show capacity
+                desc.setText(
+                        description +
+                                "\n\nMeasurements: " + (measurements != null ? measurements : "N/A") +
+                                "\nCapacity: " + (capacity != null ? capacity : "N/A") +
+                                "\nPrice: " + (price != null ? price : "N/A")
+                );
 
                 addToCartBtn.setOnClickListener(v -> {
-                    // Update addOrder if it supports capacity, otherwise send null or ignore capacity
-                    long id = ordersDbHelper.addOrder(name, description, imageResName, measurements /* you can add capacity here if supported */);
+                    long id = ordersDbHelper.addOrder(name, description, imageResName, measurements, price);
                     if (id != -1) {
-                        Toast.makeText(this, name + " added to cart\nMeasurements: " + measurements + "\nCapacity: " + capacity, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, name + " added to cart\nPrice: " + price, Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(this, "Failed to add " + name + " to cart", Toast.LENGTH_SHORT).show();
                     }

@@ -38,26 +38,25 @@ public class MaterialActivity extends AppCompatActivity {
                 String name = cursor.getString(cursor.getColumnIndexOrThrow(MaterialDatabaseHelper.COL_NAME));
                 String description = cursor.getString(cursor.getColumnIndexOrThrow(MaterialDatabaseHelper.COL_DESCRIPTION));
                 String imageResName = cursor.getString(cursor.getColumnIndexOrThrow(MaterialDatabaseHelper.COL_IMAGE));
-                String url = cursor.getString(cursor.getColumnIndexOrThrow(MaterialDatabaseHelper.COL_URL)); // Get URL
+                String url = cursor.getString(cursor.getColumnIndexOrThrow(MaterialDatabaseHelper.COL_URL));
+                double priceIncrease = cursor.getDouble(cursor.getColumnIndexOrThrow(MaterialDatabaseHelper.COL_PRICE_INCREASE));
 
-                // Resolve image resource ID
                 int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
                 if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;
 
-                // Inflate material layout
                 View materialBox = LayoutInflater.from(this).inflate(R.layout.material_box, materialContainer, false);
 
-                // Bind views
                 ImageView image = materialBox.findViewById(R.id.imageView);
                 TextView title = materialBox.findViewById(R.id.textViewTitle);
                 TextView desc = materialBox.findViewById(R.id.textViewDescription);
-                TextView more = materialBox.findViewById(R.id.textViewMore); // This must exist in your XML
+                TextView more = materialBox.findViewById(R.id.textViewMore);
+                TextView priceIncreaseText = materialBox.findViewById(R.id.textViewPriceIncrease);
 
                 image.setImageResource(imageResId);
                 title.setText(name);
                 desc.setText(description);
+                priceIncreaseText.setText("Using this material increases price by Rs. " + priceIncrease);
 
-                // Open web browser on "More Info"
                 more.setOnClickListener(v -> {
                     if (url != null && !url.isEmpty()) {
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));

@@ -51,48 +51,56 @@ public class TShirtActivity extends AppCompatActivity {
     private void loadItems(String category) {
         itemsContainer.removeAllViews();
 
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery(
-                "SELECT * FROM " + TShirtsDatabaseHelper.TABLE_NAME +
-                        " WHERE " + TShirtsDatabaseHelper.COL_CATEGORY + " = ?",
-                new String[]{category});
+        SQLiteDatabase db = null;
+        Cursor cursor = null;
+        try {
+            db = dbHelper.getReadableDatabase();
+            cursor = db.rawQuery(
+                    "SELECT * FROM " + TShirtsDatabaseHelper.TABLE_NAME +
+                            " WHERE " + TShirtsDatabaseHelper.COL_CATEGORY + " = ?",
+                    new String[]{category});
 
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                String name = cursor.getString(cursor.getColumnIndexOrThrow(TShirtsDatabaseHelper.COL_NAME));
-                String description = cursor.getString(cursor.getColumnIndexOrThrow(TShirtsDatabaseHelper.COL_DESCRIPTION));
-                String imageResName = cursor.getString(cursor.getColumnIndexOrThrow(TShirtsDatabaseHelper.COL_IMAGE));
-                String measurements = cursor.getString(cursor.getColumnIndexOrThrow(TShirtsDatabaseHelper.COL_MEASUREMENTS));
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    String name = cursor.getString(cursor.getColumnIndexOrThrow(TShirtsDatabaseHelper.COL_NAME));
+                    String description = cursor.getString(cursor.getColumnIndexOrThrow(TShirtsDatabaseHelper.COL_DESCRIPTION));
+                    String imageResName = cursor.getString(cursor.getColumnIndexOrThrow(TShirtsDatabaseHelper.COL_IMAGE));
+                    String measurements = cursor.getString(cursor.getColumnIndexOrThrow(TShirtsDatabaseHelper.COL_MEASUREMENTS));
+                    String price = cursor.getString(cursor.getColumnIndexOrThrow(TShirtsDatabaseHelper.COL_PRICE));
 
-                int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
-                if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;
+                    int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
+                    if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;
 
-                View itemBox = LayoutInflater.from(this).inflate(R.layout.readymade_box, itemsContainer, false);
+                    View itemBox = LayoutInflater.from(this).inflate(R.layout.readymade_box, itemsContainer, false);
 
-                ImageView image = itemBox.findViewById(R.id.imageView);
-                TextView title = itemBox.findViewById(R.id.textViewTitle);
-                TextView desc = itemBox.findViewById(R.id.textViewDescription);
-                Button addToCartBtn = itemBox.findViewById(R.id.buttonAddToCart);
+                    ImageView image = itemBox.findViewById(R.id.imageView);
+                    TextView title = itemBox.findViewById(R.id.textViewTitle);
+                    TextView desc = itemBox.findViewById(R.id.textViewDescription);
+                    Button addToCartBtn = itemBox.findViewById(R.id.buttonAddToCart);
 
-                image.setImageResource(imageResId);
-                title.setText(name);
-                desc.setText(description + "\n\nMeasurements: " + (measurements != null ? measurements : "N/A"));
+                    image.setImageResource(imageResId);
+                    title.setText(name);
+                    desc.setText(description + "\n\nMeasurements: " + (measurements != null ? measurements : "N/A") + "\nPrice: " + (price != null ? price : "N/A"));
 
-                addToCartBtn.setOnClickListener(v -> {
-                    long id = ordersDbHelper.addOrder(name, description, imageResName, measurements);
-                    if (id != -1) {
-                        Toast.makeText(this, name + " added to cart\nMeasurements: " + measurements, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Failed to add " + name + " to cart", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    addToCartBtn.setOnClickListener(v -> {
+                        long id = ordersDbHelper.addOrder(name, description, imageResName, measurements, price);
+                        if (id != -1) {
+                            Toast.makeText(this, name + " added to cart\nMeasurements: " + (measurements != null ? measurements : "N/A") + "\nPrice: " + (price != null ? price : "N/A"), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Failed to add " + name + " to cart", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
-                itemsContainer.addView(itemBox);
+                    itemsContainer.addView(itemBox);
 
-            } while (cursor.moveToNext());
-
-            cursor.close();
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Error loading items: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) cursor.close();
+            if (db != null) db.close();
         }
-        db.close();
     }
 }
