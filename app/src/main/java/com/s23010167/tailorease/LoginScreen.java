@@ -9,33 +9,33 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginScreen extends AppCompatActivity {
 
-    Button btnLogin;
+    Button btnLogin, btnGuest;
+    View btnNewAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_screen); // Set your login screen layout here
+        setContentView(R.layout.activity_login_screen);
 
-        // Initialize the Login button
-        btnLogin = findViewById(R.id.btnLogin); // Make sure the ID matches your XML
-        View btnNewAccount = findViewById(R.id.btnNewAccount);
+        btnLogin = findViewById(R.id.btnLogin);
+        btnGuest = findViewById(R.id.btnGuest);
+        btnNewAccount = findViewById(R.id.btnNewAccount);
 
-
-        // Set click listener to navigate to LoginActivity
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginScreen.this, LoginActivity.class);
-                startActivity(intent);
-            }
+        btnLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginScreen.this, LoginActivity.class);
+            startActivity(intent);
         });
 
-        btnNewAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginScreen.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        btnNewAccount.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginScreen.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+
+        // Guest button: start HomeActivity with guest flag
+        btnGuest.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginScreen.this, HomeActivity.class);
+            intent.putExtra("user_type", "guest");  // Pass guest mode info
+            startActivity(intent);
         });
     }
 }
