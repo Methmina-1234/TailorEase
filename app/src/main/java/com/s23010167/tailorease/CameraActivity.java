@@ -48,15 +48,13 @@ public class CameraActivity extends AppCompatActivity {
 
         sendBtn.setOnClickListener(v -> {
             if (photoUri != null) {
-                String phoneNumber = "+94740224207".replace("+", "").replace(" ", "");
-                String message = "This is my style 😊";
+                String phoneNumber = "+94740224207";
+                String message = "Hi 👋, this is my style inspiration 😊. Please have a look and feel free to contact me for more details or customizations. Thank you! 🙏";
 
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
+                Intent sendIntent = new Intent(Intent.ACTION_SEND);
                 sendIntent.setType("image/*");
                 sendIntent.putExtra(Intent.EXTRA_STREAM, photoUri);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, message);
-                sendIntent.putExtra("jid", phoneNumber + "@s.whatsapp.pic_20.jpg"); // Target specific number
                 sendIntent.setPackage("com.whatsapp");
 
                 try {
@@ -66,6 +64,7 @@ public class CameraActivity extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 

@@ -12,36 +12,36 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BlazerActivity extends AppCompatActivity {
+public class KidDressActivity extends AppCompatActivity {
 
     private LinearLayout itemsContainer;
-    private BlazerDatabaseHelper dbHelper;
+    private KidDressDatabaseHelper dbHelper;
     private OrdersDatabaseHelper ordersDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blazer);
+        setContentView(R.layout.activity_kiddress);
 
         itemsContainer = findViewById(R.id.itemsContainer);
-        dbHelper = new BlazerDatabaseHelper(this);
+        dbHelper = new KidDressDatabaseHelper(this);
         ordersDbHelper = new OrdersDatabaseHelper(this);
 
-        loadBlazers();
+        loadKidDresses();
     }
 
-    private void loadBlazers() {
+    private void loadKidDresses() {
         itemsContainer.removeAllViews();
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + BlazerDatabaseHelper.TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + KidDressDatabaseHelper.TABLE_NAME, null);
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(cursor.getColumnIndexOrThrow(BlazerDatabaseHelper.COL_NAME));
-                String description = cursor.getString(cursor.getColumnIndexOrThrow(BlazerDatabaseHelper.COL_DESCRIPTION));
-                String imageResName = cursor.getString(cursor.getColumnIndexOrThrow(BlazerDatabaseHelper.COL_IMAGE));
-                String measurements = cursor.getString(cursor.getColumnIndexOrThrow(BlazerDatabaseHelper.COL_MEASUREMENTS));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow(KidDressDatabaseHelper.COL_NAME));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow(KidDressDatabaseHelper.COL_DESCRIPTION));
+                String imageResName = cursor.getString(cursor.getColumnIndexOrThrow(KidDressDatabaseHelper.COL_IMAGE));
+                String measurements = cursor.getString(cursor.getColumnIndexOrThrow(KidDressDatabaseHelper.COL_MEASUREMENTS));
 
                 int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
                 if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;

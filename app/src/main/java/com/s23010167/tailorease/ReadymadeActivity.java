@@ -33,7 +33,7 @@ public class ReadymadeActivity extends AppCompatActivity {
                 startActivity(new Intent(this, BlazerActivity.class)));
 
         kidsDress.setOnClickListener(v ->
-                startActivity(new Intent(this, KidsDressActivity.class)));
+                startActivity(new Intent(this, KidDressActivity.class)));
 
         bags.setOnClickListener(v ->
                 startActivity(new Intent(this, BagsActivity.class)));
