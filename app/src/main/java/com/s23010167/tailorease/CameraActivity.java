@@ -58,9 +58,20 @@ public class CameraActivity extends AppCompatActivity {
                 sendIntent.setPackage("com.whatsapp");
 
                 try {
-                    startActivity(sendIntent);
+                    // Show system-style message before opening WhatsApp
+                    Toast.makeText(this, "Please select the TailorEase shop chat to send your image 📸", Toast.LENGTH_LONG).show();
+
+                    // Optional: add slight delay to make sure Toast is seen
+                    sendBtn.postDelayed(() -> {
+                        try {
+                            startActivity(sendIntent);
+                        } catch (Exception e) {
+                            Toast.makeText(this, "WhatsApp not installed or failed to send", Toast.LENGTH_SHORT).show();
+                        }
+                    }, 1000); // 1 second delay
+
                 } catch (Exception e) {
-                    Toast.makeText(this, "WhatsApp not installed or failed to send", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Error preparing WhatsApp", Toast.LENGTH_SHORT).show();
                 }
             }
         });

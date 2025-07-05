@@ -39,7 +39,7 @@ public class HomeActivity_si extends AppCompatActivity {
         });
 
         imageButton2.setOnClickListener(view -> {
-            startActivity(new Intent(HomeActivity_si.this, ReadymadeActivity.class));
+            startActivity(new Intent(HomeActivity_si.this, ReadymadeActivity_si.class));
         });
 
         imageButton3.setOnClickListener(view -> {

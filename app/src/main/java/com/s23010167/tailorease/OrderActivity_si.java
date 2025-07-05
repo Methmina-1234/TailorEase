@@ -50,7 +50,7 @@ public class OrderActivity_si extends AppCompatActivity {
                     int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
                     if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;
 
-                    View orderBox = LayoutInflater.from(this).inflate(R.layout.order_box, orderContainer, false);
+                    View orderBox = LayoutInflater.from(this).inflate(R.layout.si_order_box, orderContainer, false);
 
                     ImageView image = orderBox.findViewById(R.id.imageViewOrder);
                     TextView title = orderBox.findViewById(R.id.textViewOrderTitle);

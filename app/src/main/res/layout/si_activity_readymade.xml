@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="@drawable/background"
+    >
+
+
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_border1"
+        android:clipToOutline="true"
+        android:contentDescription="Image button"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/pic_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.170"
+        app:layout_constraintWidth_percent="0.45" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="83dp"
+        android:layout_height="24dp"
+        android:background="@drawable/rounded_textview"
+        android:fontFamily="@font/my_font"
+        android:text="කලිසම්"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton8"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton8"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="@+id/imageButton8"
+        app:layout_constraintTop_toTopOf="@+id/imageButton8"
+        app:layout_constraintVertical_bias="0.516" />
+
+    <ImageButton
+        android:id="@+id/imageButton9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_border1"
+        android:clipToOutline="true"
+        android:contentDescription="Image button"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/pic_9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.170"
+        app:layout_constraintWidth_percent="0.45" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="80dp"
+        android:layout_height="23dp"
+        android:background="@drawable/rounded_textview"
+        android:fontFamily="@font/my_font"
+        android:text="කමිස"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton9"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton9"
+        app:layout_constraintStart_toStartOf="@+id/imageButton9"
+        app:layout_constraintTop_toTopOf="@+id/imageButton9" />
+
+
+    <ImageButton
+        android:id="@+id/imageButton11"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_border3"
+        android:clipToOutline="true"
+        android:contentDescription="Image button"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/pic_11"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.45" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="74dp"
+        android:layout_height="23dp"
+        android:background="@drawable/rounded_textview"
+        android:fontFamily="@font/my_font"
+        android:text="බ්ලේසර්"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton11"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton11"
+        app:layout_constraintStart_toStartOf="@+id/imageButton11"
+        app:layout_constraintTop_toTopOf="@+id/imageButton11" />
+
+    <ImageButton
+        android:id="@+id/imageButton10"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_border1"
+        android:clipToOutline="true"
+        android:contentDescription="Image button"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/pic_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.00"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.45" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="107dp"
+        android:layout_height="21dp"
+        android:background="@drawable/rounded_textview"
+        android:fontFamily="@font/my_font"
+        android:text="කාන්තා ඇඳුම"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton10"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton10"
+        app:layout_constraintStart_toStartOf="@+id/imageButton10"
+        app:layout_constraintTop_toTopOf="@+id/imageButton10" />
+
+    <ImageButton
+        android:id="@+id/imageButton13"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_border1"
+        android:clipToOutline="true"
+        android:contentDescription="Image button"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/pic_13"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintWidth_percent="0.45" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="74dp"
+        android:layout_height="23dp"
+        android:background="@drawable/rounded_textview"
+        android:fontFamily="@font/my_font"
+        android:text="බෑග්"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton13"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton13"
+        app:layout_constraintStart_toStartOf="@+id/imageButton13"
+        app:layout_constraintTop_toTopOf="@+id/imageButton13" />
+
+    <ImageButton
+        android:id="@+id/imageButton12"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/rounded_border1"
+        android:clipToOutline="true"
+        android:contentDescription="Image button"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/pic_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.826"
+        app:layout_constraintWidth_percent="0.45" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="87dp"
+        android:layout_height="23dp"
+        android:background="@drawable/rounded_textview"
+        android:fontFamily="@font/my_font"
+        android:text="ළමුන්ගේ ඇඳුම"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton12"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton12"
+        app:layout_constraintStart_toStartOf="@+id/imageButton12"
+        app:layout_constraintTop_toTopOf="@+id/imageButton12" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

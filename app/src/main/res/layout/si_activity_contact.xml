@@ -19,7 +19,6 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.9"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -115,7 +114,7 @@
         android:id="@+id/tv_description2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:autoLink="web|phone"
         android:background="@drawable/rounded_bg1"
         android:linksClickable="true"
@@ -125,8 +124,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/tv_description1"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent="0.9" />
 
 

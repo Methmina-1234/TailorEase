@@ -44,7 +44,7 @@ public class MaterialActivity_si extends AppCompatActivity {
                 int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
                 if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;
 
-                View materialBox = LayoutInflater.from(this).inflate(R.layout.material_box, materialContainer, false);
+                View materialBox = LayoutInflater.from(this).inflate(R.layout.si_material_box, materialContainer, false);
 
                 ImageView image = materialBox.findViewById(R.id.imageView);
                 TextView title = materialBox.findViewById(R.id.textViewTitle);

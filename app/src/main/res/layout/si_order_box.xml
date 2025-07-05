@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/rounded_bg"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imageViewOrder"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_border1"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.35" />
+
+    <TextView
+        android:id="@+id/textViewOrderTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_bg1"
+        android:fontFamily="@font/my_font"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Order Name"
+        android:textColor="#F6B056"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewOrder"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/textViewOrderDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/my_font"
+        android:padding="4dp"
+        android:text="Order Description"
+        android:textColor="#F6B056"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewOrderTitle"
+        app:layout_constraintStart_toStartOf="@id/textViewOrderTitle"
+        app:layout_constraintEnd_toEndOf="@id/textViewOrderTitle"/>
+
+    <Button
+        android:id="@+id/buttonOrderNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ඇණවුම් කරන්න"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#F44336"
+        android:padding="8dp"
+        android:textSize="10dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewOrderDescription"
+        app:layout_constraintStart_toStartOf="@id/textViewOrderDescription"
+        app:layout_constraintEnd_toStartOf="@id/buttonCancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"/>
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="අවලංගු කරන්න"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#9E9E9E"
+        android:padding="8dp"
+        android:textSize="10dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewOrderDescription"
+        app:layout_constraintStart_toEndOf="@id/buttonOrderNow"
+        app:layout_constraintEnd_toEndOf="@id/textViewOrderDescription"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

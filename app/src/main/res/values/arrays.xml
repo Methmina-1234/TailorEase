@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="clothing_types_si">
+        <item>කලිසම්</item>
+        <item>ටී-ශර්ට්</item>
+        <item>කමිස</item>
+        <item>කාන්තා ඇඳුම</item>
+        <item>බ්ලේසර්</item>
+        <item>ළමුන්ගේ ඇඳුම</item>
+        <item>කොට කලිසම්</item>
+        <item>කුරුතා</item>
+        <item>සාරි බ්ලවුස්</item>
+        <item>ගවුම්</item>
+        <item>බෑග්</item>
+    </string-array>
+
+    <string-array name="material_types_si">
+        <item>කපු රෙදි</item>
+        <item>ලිනන් රෙදි</item>
+        <item>සේද රෙදි</item>
+        <item>ඩෙනිම් රෙදි</item>
+        <item>පොලියෙස්ටර් රෙදි</item>
+        <item>ලොම් රෙදි</item>
+        <item>දැල් රෙදි</item>
+    </string-array>
+</resources>

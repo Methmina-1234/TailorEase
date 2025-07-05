@@ -90,6 +90,10 @@
         <activity android:name=".OrderActivity_si" />
         <activity android:name=".CameraActivity_si" />
 
+        <activity android:name=".TrousersActivity_si" />
+        <activity android:name=".TShirtActivity_si" />
+
+
 
 
 

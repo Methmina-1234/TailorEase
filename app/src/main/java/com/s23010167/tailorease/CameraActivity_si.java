@@ -57,9 +57,20 @@ public class CameraActivity_si extends AppCompatActivity {
                 sendIntent.setPackage("com.whatsapp");
 
                 try {
-                    startActivity(sendIntent);
+                    // Show system-style message before opening WhatsApp
+                    Toast.makeText(this, "ඔබගේ රූපය යැවීමට කරුණාකර TailorEase සාප්පුවේWhatsApp Chat එක තෝරන්න \uD83D\uDCF8", Toast.LENGTH_LONG).show();
+
+                    // Optional: add slight delay to make sure Toast is seen
+                    sendBtn.postDelayed(() -> {
+                        try {
+                            startActivity(sendIntent);
+                        } catch (Exception e) {
+                            Toast.makeText(this, "WhatsApp ස්ථාපනය කර නැත හෝ යැවීමට අසමත් විය", Toast.LENGTH_SHORT).show();
+                        }
+                    }, 1000); // 1 second delay
+
                 } catch (Exception e) {
-                    Toast.makeText(this, "WhatsApp ස්ථාපනය වී නැත හෝ යැවීම අසාර්ථක විය", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "WhatsApp සකස් කිරීමේ දෝෂයකි", Toast.LENGTH_SHORT).show();
                 }
             }
         });
