@@ -24,6 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
@@ -35,30 +36,26 @@
         android:src="@drawable/pic_1"
         app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintEnd_toStartOf="@+id/button_call"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="@id/imageView6"
         app:layout_constraintTop_toTopOf="@id/imageView6"
         app:layout_constraintVertical_bias="0.03"
         app:layout_constraintWidth_percent="0.35" />
-
 
     <Button
         android:id="@+id/button_call"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="#F44336"
-        android:text="Call Us"
+        android:text="අමතන්න"
         android:textColor="@android:color/white"
-
         app:layout_constraintBottom_toBottomOf="@id/imageView6"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@id/imageView6"
         app:layout_constraintHorizontal_bias="0.591"
-
         app:layout_constraintStart_toStartOf="@id/imageView6"
         app:layout_constraintTop_toTopOf="@id/imageView6"
-
         app:layout_constraintVertical_bias="0.063"
         app:layout_constraintWidth_percent="0.25" />
 
@@ -69,17 +66,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="#4CAF50"
-        android:text="Map"
+        android:text="සිතියම"
         android:textColor="@android:color/white"
-
         app:layout_constraintBottom_toBottomOf="@id/imageView6"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@id/imageView6"
         app:layout_constraintHorizontal_bias="0.955"
-
         app:layout_constraintStart_toStartOf="@id/imageView6"
         app:layout_constraintTop_toTopOf="@id/imageView6"
-
         app:layout_constraintVertical_bias="0.063"
         app:layout_constraintWidth_percent="0.25" />
 
@@ -90,7 +84,7 @@
         android:layout_marginTop="168dp"
         android:background="@drawable/rounded_bg1"
         android:gravity="center"
-        android:text="Contact Us"
+        android:text="අපව අමතන්න"
         android:textColor="#F6B056"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -106,15 +100,15 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_bg1"
         android:padding="15dp"
-        android:text="TailorEase is open Monday to Saturday from 9:00 AM to 7:00 PM.\n\nFor appointments, urgent tailoring, or queries, feel free to call or visit our location via the map above.\n\nWe specialize in custom clothing for men, women, and kids – with quality materials and perfect fittings.\n\nContact us today and experience expert tailoring with convenience."
+        android:text="TailorEase සඳුදා සිට සෙනසුරාදා දක්වා පෙ.ව. 9:00 සිට ප.ව. 7:00 දක්වා විවෘතයි.\n\nහමුවීම්, හදිසි මැහුම් හෝ විමසීම් සඳහා, ඉහත සිතියම හරහා අපගේ ස්ථානයට කතා කිරීමට හෝ පැමිණීමට නිදහස් වන්න.\n\nඅපි පිරිමින්, කාන්තාවන් සහ ළමුන් සඳහා අභිරුචි ඇඳුම් සඳහා විශේෂඥයින් වෙමු - ගුණාත්මක ද්‍රව්‍ය සහ පරිපූර්ණ සවි කිරීම් සමඟ.\n\nඅදම අප හා සම්බන්ධ වී පහසුව සමඟ විශේෂඥ මැහුම් අත්විඳින්න."
         android:textColor="#F6B056"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/tv_contact_title"
-        app:layout_constraintVertical_bias="0.029"
+        app:layout_constraintVertical_bias="0.013"
         app:layout_constraintWidth_percent="0.8" />
 
     <TextView
@@ -126,9 +120,10 @@
         android:background="@drawable/rounded_bg1"
         android:linksClickable="true"
         android:padding="15dp"
-        android:text="Website: https://www.tailorease.com\nFacebook: https://www.facebook.com/tailorease\nInstagram: https://www.instagram.com/tailorease\nWhatsApp: +94 74 022 4207\nPhone: +94 31 223 0798"
+        android:text="වෙබ් අඩවිය: https://www.tailorease.com\nෆේස්බුක්: https://www.facebook.com/tailorease\nඉන්ස්ටග්‍රෑම්: https://www.instagram.com/tailorease\nWhatsApp අංකය: +94 74 022 4207\nදුරකථන අංකය: +94 31 223 0798"
         android:textColor="#F6B056"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/tv_description1"

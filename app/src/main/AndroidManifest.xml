@@ -47,29 +47,17 @@
         </activity>
 
         <activity android:name=".MainActivity"/>
-
         <activity android:name=".LoginScreen"/>
-
         <activity android:name=".LoginActivity"/>
-
         <activity android:name=".RegisterActivity"/>
-
         <activity android:name=".HomeActivity"/>
-
         <activity android:name=".CustomizeActivity" />
-
         <activity android:name=".ReadymadeActivity" />
-
         <activity android:name=".MaterialActivity" />
-
         <activity android:name=".ContactActivity" />
-
         <activity android:name=".MapsActivity" />
-
         <activity android:name=".AboutActivity" />
-
         <activity android:name=".OrderActivity" />
-
         <activity android:name=".CameraActivity" />
 
         <provider
@@ -88,6 +76,27 @@
         <activity android:name=".BlazerActivity" />
         <activity android:name=".KidDressActivity" />
         <activity android:name=".BagActivity" />
+
+
+        <activity android:name=".LoginScreen_si"/>
+        <activity android:name=".LoginActivity_si"/>
+        <activity android:name=".RegisterActivity_si"/>
+        <activity android:name=".HomeActivity_si"/>
+        <activity android:name=".CustomizeActivity_si" />
+        <activity android:name=".ReadymadeActivity_si" />
+        <activity android:name=".MaterialActivity_si" />
+        <activity android:name=".ContactActivity_si" />
+        <activity android:name=".AboutActivity_si" />
+        <activity android:name=".OrderActivity_si" />
+        <activity android:name=".CameraActivity_si" />
+
+
+
+
+
+
+
+
 
     </application>
 

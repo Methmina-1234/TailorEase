@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:padding="24dp"
+    tools:context=".LoginScreen">
+
+    <!-- Background Panel -->
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_bg"
+        android:scaleType="fitXY"
+        android:clipToOutline="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.8" />
+
+    <!-- Logo or Icon -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_border1"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:padding="8dp"
+        android:src="@drawable/pic_1"
+        app:layout_constraintTop_toTopOf="@+id/imageView6"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <!-- Description Text -->
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_bg1"
+        android:fontFamily="@font/my_font"
+        android:padding="20dp"
+        android:text="TailorEase යනු ඔබේ අවසන් සන්සුන් ඇඳුම් හවුල්කරුවෙකි — පළපුරුදු කාර්මිකත්වය, විලාසිතාව සහ පහසුව ඔබේ අතටම ගෙන එයි. සුන්දර සැලසුම් සෙවීමට, ඔබේ ඇඳුම් අභිරුචිකරණය කිරීමට, ඇණවුම් කිරීමට සහ තත්ත්වය අධීක්ෂණය කිරීමට ඔබේ ජංගම උපාංගය භාවිතා කරන්න. දිනපතා භාවිතයට හෝ විශේෂ අවස්ථාවකට වුවද, TailorEase ඔබේ අභිරුචි විලාසිතාව පහසුවෙන් සහ නිරායාසව ලබා ගැනීමට උපකාරී වේ."
+        android:textColor="#F6B056"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+        app:layout_constraintStart_toStartOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="@+id/imageView6"
+        app:layout_constraintWidth_percent="0.8"
+        android:gravity="center" />
+</androidx.constraintlayout.widget.ConstraintLayout>
