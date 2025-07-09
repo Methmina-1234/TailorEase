@@ -34,7 +34,7 @@ public class HomeActivity_si extends AppCompatActivity {
         }
 
         imageButton1.setOnClickListener(view -> {
-            if (checkGuestRestriction("අභිරුචිකරණය")) return;
+            if (checkGuestRestriction("සකසන්න")) return;
             startActivity(new Intent(HomeActivity_si.this, CustomizeActivity_si.class));
         });
 

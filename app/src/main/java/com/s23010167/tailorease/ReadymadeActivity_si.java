@@ -27,15 +27,15 @@ public class ReadymadeActivity_si extends AppCompatActivity {
                 startActivity(new Intent(this, TShirtActivity_si.class)));
 
         ladyDress.setOnClickListener(v ->
-                startActivity(new Intent(this, LadyDressActivity.class)));
+                startActivity(new Intent(this, LadyDressActivity_si.class)));
 
         blazer.setOnClickListener(v ->
-                startActivity(new Intent(this, BlazerActivity.class)));
+                startActivity(new Intent(this, BlazerActivity_si.class)));
 
         kidsDress.setOnClickListener(v ->
-                startActivity(new Intent(this, KidDressActivity.class)));
+                startActivity(new Intent(this, KidDressActivity_si.class)));
 
         bags.setOnClickListener(v ->
-                startActivity(new Intent(this, BagActivity.class)));
+                startActivity(new Intent(this, BagActivity_si.class)));
     }
 }

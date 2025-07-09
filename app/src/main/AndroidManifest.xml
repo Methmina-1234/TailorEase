@@ -92,15 +92,10 @@
 
         <activity android:name=".TrousersActivity_si" />
         <activity android:name=".TShirtActivity_si" />
-
-
-
-
-
-
-
-
-
+        <activity android:name=".LadyDressActivity_si" />
+        <activity android:name=".BlazerActivity_si" />
+        <activity android:name=".KidDressActivity_si" />
+        <activity android:name=".BagActivity_si" />
 
     </application>
 
