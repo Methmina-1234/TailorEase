@@ -1,9 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.TailorEase" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <!-- App main theme -->
+    <style name="Theme.TailorEase" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Light mode overrides -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
-    <style name="Theme.TailorEase" parent="Base.Theme.TailorEase" />
+    <!-- Custom AlertDialog theme -->
+    <style name="CustomAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="android:background">@color/brand_light</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
+        <item name="buttonTint">@color/black</item>
+    </style>
+
+
 </resources>

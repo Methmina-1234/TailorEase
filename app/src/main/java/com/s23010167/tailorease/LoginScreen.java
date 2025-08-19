@@ -36,19 +36,33 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     private void showGuestDialog() {
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this, R.style.CustomAlertDialog)
                 .setTitle("👋 Welcome, Guest!")
                 .setMessage("You're entering TailorEase as a guest.\n\n🚫 Some premium features like ✂️ Customize, 🧾 Orders, and 📞 Contact will be *disabled*.\n\n✨ Want the full experience?\nCreate a free account to unlock everything!")
-                .setPositiveButton("Continue as Guest 🚶‍♂️", (dialog, which) -> {
+                .setPositiveButton("Continue as Guest 🚶‍♂️", (dialogInterface, which) -> {
                     Intent intent = new Intent(LoginScreen.this, HomeActivity.class);
                     intent.putExtra("user_type", "guest");
                     startActivity(intent);
                 })
-                .setNegativeButton("Register Now ✍️", (dialog, which) -> {
+                .setNegativeButton("Register Now ✍️", (dialogInterface, which) -> {
                     startActivity(new Intent(LoginScreen.this, RegisterActivity.class));
                 })
                 .setCancelable(true)
-                .show();
+                .create();
+
+        dialog.show();
+
+        // Determine current mode
+        int nightModeFlags = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        int textColor = (nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES)
+                ? getResources().getColor(R.color.brand_light)   // dark mode → orange text
+                : getResources().getColor(R.color.brand_dark);   // light mode → dark blue text
+
+        // Set button text colors
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(textColor);
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(textColor);
     }
+
+
 
 }

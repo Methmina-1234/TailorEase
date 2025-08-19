@@ -1,7 +1,9 @@
 package com.s23010167.tailorease;
 
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,10 @@ public class TShirtActivity extends AppCompatActivity {
 
     private String currentCategory = "T-Shirt";
 
+    // 🔹 Define your two colors (you can also move them to colors.xml if you like)
+    private final String COLOR_YELLOW = "#F5AF56"; // Yellow
+    private final String COLOR_BLUE = "#FF0D2D4D";   // Blue
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +41,24 @@ public class TShirtActivity extends AppCompatActivity {
         dbHelper = new TShirtsDatabaseHelper(this);
         ordersDbHelper = new OrdersDatabaseHelper(this);
 
+        // 🔹 Set default state (both yellow bg, blue text)
+        resetButton(btnTShirts);
+        resetButton(btnShirts);
+
+        // 🔹 Highlight T-Shirts by default
+        highlightButton(btnTShirts);
+
         btnTShirts.setOnClickListener(v -> {
             currentCategory = "T-Shirt";
+            highlightButton(btnTShirts);
+            resetButton(btnShirts);
             loadItems(currentCategory);
         });
 
         btnShirts.setOnClickListener(v -> {
             currentCategory = "Shirt";
+            highlightButton(btnShirts);
+            resetButton(btnTShirts);
             loadItems(currentCategory);
         });
 
@@ -80,12 +97,18 @@ public class TShirtActivity extends AppCompatActivity {
 
                     image.setImageResource(imageResId);
                     title.setText(name);
-                    desc.setText(description + "\n\nMeasurements: " + (measurements != null ? measurements : "N/A") + "\nPrice: " + (price != null ? price : "N/A"));
+                    desc.setText(description + "\n\nMeasurements: " +
+                            (measurements != null ? measurements : "N/A") +
+                            "\nPrice: " + (price != null ? price : "N/A"));
 
                     addToCartBtn.setOnClickListener(v -> {
                         long id = ordersDbHelper.addOrder(name, description, imageResName, measurements, price);
                         if (id != -1) {
-                            Toast.makeText(this, name + " added to cart\nMeasurements: " + (measurements != null ? measurements : "N/A") + "\nPrice: " + (price != null ? price : "N/A"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this,
+                                    name + " added to cart\nMeasurements: " +
+                                            (measurements != null ? measurements : "N/A") +
+                                            "\nPrice: " + (price != null ? price : "N/A"),
+                                    Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(this, "Failed to add " + name + " to cart", Toast.LENGTH_SHORT).show();
                         }
@@ -102,5 +125,17 @@ public class TShirtActivity extends AppCompatActivity {
             if (cursor != null) cursor.close();
             if (db != null) db.close();
         }
+    }
+
+    // Highlight selected button (Blue bg, Yellow text)
+    private void highlightButton(Button button) {
+        button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(COLOR_BLUE)));
+        button.setTextColor(Color.parseColor(COLOR_YELLOW));
+    }
+
+    // Reset unselected button (Yellow bg, Blue text)
+    private void resetButton(Button button) {
+        button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(COLOR_YELLOW)));
+        button.setTextColor(Color.parseColor(COLOR_BLUE));
     }
 }

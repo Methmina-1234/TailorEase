@@ -4,4 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#4CAF50</color>
     <color name="blue">#2196F3</color>
+
+    <color name="brand_light">#FAD6A7</color> <!-- replaces white -->
+    <color name="brand_dark">#0D2D4D</color> <!-- replaces black -->
+
 </resources>

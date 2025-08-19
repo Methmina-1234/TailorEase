@@ -1,7 +1,18 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.TailorEase" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+<resources>
+
+    <style name="Theme.TailorEase" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Dark mode overrides -->
+        <item name="colorPrimary">@color/black</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
     </style>
+
+    <!-- Dark mode AlertDialog -->
+    <style name="CustomAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="android:background">@color/brand_dark</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="buttonTint">@color/white</item>
+    </style>
+
+
 </resources>

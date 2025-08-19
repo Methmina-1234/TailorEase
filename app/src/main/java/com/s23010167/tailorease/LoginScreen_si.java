@@ -36,19 +36,32 @@ public class LoginScreen_si extends AppCompatActivity {
     }
 
     private void showGuestDialog() {
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this, R.style.CustomAlertDialog)
                 .setTitle("👋 සාදරයෙන් පිළිගනිමු, අමුත්තා!")
                 .setMessage("ඔබ TailorEase වෙත ඇතුළු වන්නේ අමුත්තෙකු ලෙසයි.\n\n🚫 ✂\uFE0F සකසන්න, \uD83E\uDDFE ඇණවුම්, සහ \uD83D\uDCDE සම්බන්ධතා වැනි සමහර වාරික විශේෂාංග *අක්\u200Dරිය* කෙරේ.\n\n✨ සම්පූර්ණ අත්දැකීමම අවශ්‍යද?\nසියල්ල අගුළු ඇරීමට නොමිලේ ගිණුමක් සාදන්න!")
-                .setPositiveButton("ආගන්තුකයෙකු ලෙස ඉදිරියට යන්න 🚶‍♂️", (dialog, which) -> {
+                .setPositiveButton("ආගන්තුකයෙකු ලෙස ඉදිරියට යන්න 🚶‍♂️", (dialogInterface, which) -> {
                     Intent intent = new Intent(LoginScreen_si.this, HomeActivity_si.class);
                     intent.putExtra("user_type", "guest");
                     startActivity(intent);
                 })
-                .setNegativeButton("දැන් ලියාපදිංචි වන්න ✍️", (dialog, which) -> {
+                .setNegativeButton("දැන් ලියාපදිංචි වන්න ✍️", (dialogInterface, which) -> {
                     startActivity(new Intent(LoginScreen_si.this, RegisterActivity_si.class));
                 })
                 .setCancelable(true)
-                .show();
+                .create();
+
+        dialog.show();
+
+        // Determine current mode
+        int nightModeFlags = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        int textColor = (nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES)
+                ? getResources().getColor(R.color.brand_light)   // dark mode → orange text
+                : getResources().getColor(R.color.brand_dark);   // light mode → dark blue text
+
+        // Set button text colors
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(textColor);
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(textColor);
     }
+
 
 }
