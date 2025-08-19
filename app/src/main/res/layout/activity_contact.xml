@@ -127,6 +127,7 @@
         android:padding="15dp"
         android:text="Website: https://www.tailorease.com\nFacebook: https://www.facebook.com/tailorease\nInstagram: https://www.instagram.com/tailorease\nWhatsApp: +94 74 022 4207\nPhone: +94 31 223 0798"
         android:textColor="#F6B056"
+        android:textColorLink="#F6BEEF"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintStart_toStartOf="@+id/imageView6"

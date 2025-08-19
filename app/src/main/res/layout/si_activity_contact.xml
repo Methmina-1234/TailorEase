@@ -121,6 +121,7 @@
         android:padding="15dp"
         android:text="වෙබ් අඩවිය: https://www.tailorease.com\nෆේස්බුක්: https://www.facebook.com/tailorease\nඉන්ස්ටග්‍රෑම්: https://www.instagram.com/tailorease\nWhatsApp අංකය: +94 74 022 4207\nදුරකථන අංකය: +94 31 223 0798"
         android:textColor="#F6B056"
+        android:textColorLink="#F6BEEF"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
