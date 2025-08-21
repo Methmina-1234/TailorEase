@@ -6,16 +6,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BlazerDatabaseHelper_si extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "blazers_si.db";
-    private static final int DATABASE_VERSION = 2; // Bump version to trigger onUpgrade
+    // Database details
+    private static final String DATABASE_NAME = "blazers_si.db"; // Sinhala blazer database file
+    private static final int DATABASE_VERSION = 2; // Increment if schema changes
 
+    // Table & column names
     public static final String TABLE_NAME = "blazers";
-    public static final String COL_ID = "id";
-    public static final String COL_NAME = "name";
-    public static final String COL_DESCRIPTION = "description";
-    public static final String COL_IMAGE = "image";
-    public static final String COL_MEASUREMENTS = "measurements";
-    public static final String COL_PRICE = "price"; // ⬅️ New column
+    public static final String COL_ID = "id";               // Primary key
+    public static final String COL_NAME = "name";           // Blazer name (Sinhala)
+    public static final String COL_DESCRIPTION = "description"; // Description (Sinhala)
+    public static final String COL_IMAGE = "image";         // Drawable image name
+    public static final String COL_MEASUREMENTS = "measurements"; // Measurements in Sinhala
+    public static final String COL_PRICE = "price";         // Price (Sinhala format: රු.)
 
     public BlazerDatabaseHelper_si(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -23,6 +25,7 @@ public class BlazerDatabaseHelper_si extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Create table schema
         String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_NAME + " TEXT, " +
@@ -32,6 +35,7 @@ public class BlazerDatabaseHelper_si extends SQLiteOpenHelper {
                 COL_PRICE + " TEXT)";
         db.execSQL(createTable);
 
+        // Insert initial blazer data (Sinhala content)
         db.execSQL("INSERT INTO " + TABLE_NAME + " (" +
                 COL_NAME + ", " + COL_DESCRIPTION + ", " + COL_IMAGE + ", " + COL_MEASUREMENTS + ", " + COL_PRICE + ") VALUES " +
 
@@ -49,7 +53,9 @@ public class BlazerDatabaseHelper_si extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Remove old table
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        // Recreate table and reinsert data
         onCreate(db);
     }
 }

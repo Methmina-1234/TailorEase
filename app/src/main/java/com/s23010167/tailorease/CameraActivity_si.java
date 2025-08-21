@@ -23,11 +23,15 @@ import java.util.Date;
 
 public class CameraActivity_si extends AppCompatActivity {
 
+    // Request codes for camera capture and permission requests
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_CAMERA_PERMISSION = 2;
 
+    // URI and File for the captured photo
     private Uri photoUri;
     private File photoFile;
+
+    // Views for preview and sending
     private ImageView imageView;
     private Button sendBtn;
 
@@ -36,38 +40,43 @@ public class CameraActivity_si extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.si_activity_camera);
 
+        // Initialize views
         imageView = findViewById(R.id.imageViewPreview);
         sendBtn = findViewById(R.id.btnSendWhatsapp);
 
+        // Check if camera permission is granted; if yes, open camera
         if (checkCameraPermission()) {
             dispatchTakePictureIntent();
         } else {
             requestCameraPermission();
         }
 
+        // Send button listener to share captured image via WhatsApp
         sendBtn.setOnClickListener(v -> {
             if (photoUri != null) {
-                String phoneNumber = "+94740224207";
+                String phoneNumber = "+94740224207"; // TailorEase shop number
                 String message = "හෙලෝ 👋, මේක මගේ විලාසිතාවයි 😊. කරුණාකර බලන්න සහ වැඩි විස්තර හෝ රූපය අනුව සැකසුම් සඳහා මාව අමතන්න. ස්තුතියි! 🙏";
 
+                // Create intent to share image + text
                 Intent sendIntent = new Intent(Intent.ACTION_SEND);
                 sendIntent.setType("image/*");
-                sendIntent.putExtra(Intent.EXTRA_STREAM, photoUri);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, message);
-                sendIntent.setPackage("com.whatsapp");
+                sendIntent.putExtra(Intent.EXTRA_STREAM, photoUri); // attach image
+                sendIntent.putExtra(Intent.EXTRA_TEXT, message);    // attach message
+                sendIntent.setPackage("com.whatsapp"); // open only in WhatsApp
+
 
                 try {
-                    // Show system-style message before opening WhatsApp
+                    // Inform user to select the correct chat in WhatsApp
                     Toast.makeText(this, "ඔබගේ රූපය යැවීමට කරුණාකර TailorEase සාප්පුවේWhatsApp Chat එක තෝරන්න \uD83D\uDCF8", Toast.LENGTH_LONG).show();
 
-                    // Optional: add slight delay to make sure Toast is seen
+                    // Delay ensures the toast is visible before launching WhatsApp
                     sendBtn.postDelayed(() -> {
                         try {
                             startActivity(sendIntent);
                         } catch (Exception e) {
                             Toast.makeText(this, "WhatsApp ස්ථාපනය කර නැත හෝ යැවීමට අසමත් විය", Toast.LENGTH_SHORT).show();
                         }
-                    }, 1000); // 1 second delay
+                    }, 2000); // 2 second delay
 
                 } catch (Exception e) {
                     Toast.makeText(this, "WhatsApp සකස් කිරීමේ දෝෂයකි", Toast.LENGTH_SHORT).show();
@@ -90,10 +99,17 @@ public class CameraActivity_si extends AppCompatActivity {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             try {
+                // Create a file to store the captured image
                 photoFile = createImageFile();
                 if (photoFile != null) {
-                    photoUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", photoFile);
+                    // Get URI for FileProvider
+                    photoUri = FileProvider.getUriForFile(this,
+                            getPackageName() + ".fileprovider", photoFile);
+
+                    // Pass URI to camera intent
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+
+                    // Launch camera
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
             } catch (IOException e) {
@@ -107,7 +123,7 @@ public class CameraActivity_si extends AppCompatActivity {
 
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File storageDir = getExternalFilesDir("Pictures");
+        File storageDir = getExternalFilesDir("Pictures"); // private folder
         return File.createTempFile("JPEG_" + timeStamp + "_", ".jpg", storageDir);
     }
 
@@ -115,6 +131,7 @@ public class CameraActivity_si extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            // Display captured image in ImageView
             imageView.setImageURI(photoUri);
         }
     }
@@ -125,6 +142,7 @@ public class CameraActivity_si extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, open camera
                 dispatchTakePictureIntent();
             } else {
                 Toast.makeText(this, "කැමරා අවසරය අවශ්‍යයි", Toast.LENGTH_SHORT).show();

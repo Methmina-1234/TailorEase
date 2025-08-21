@@ -6,26 +6,30 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BagDatabaseHelper_si extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "bags_si.db";
-    private static final int DATABASE_VERSION = 3; // ⬅️ bump version
+    // Database details
+    private static final String DATABASE_NAME = "bags_si.db"; // Database file name
+    private static final int DATABASE_VERSION = 3;            // Must increase if schema changes
 
+    // Table and column names
     public static final String TABLE_NAME = "bags";
     public static final String COL_ID = "id";
-    public static final String COL_NAME = "name";
-    public static final String COL_DESCRIPTION = "description";
-    public static final String COL_IMAGE = "image";
-    public static final String COL_MEASUREMENTS = "measurements";
-    public static final String COL_CAPACITY = "capacity";
-    public static final String COL_PRICE = "price"; // ⬅️ new column
+    public static final String COL_NAME = "name";               // Bag name (in Sinhala or English)
+    public static final String COL_DESCRIPTION = "description"; // Description in Sinhala
+    public static final String COL_IMAGE = "image";             // Image resource name
+    public static final String COL_MEASUREMENTS = "measurements"; // Dimensions in Sinhala
+    public static final String COL_CAPACITY = "capacity";       // Bag capacity (liters)
+    public static final String COL_PRICE = "price";             // Price in rupees (Sinhala format)
 
+    // Constructor
     public BagDatabaseHelper_si(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // SQL query for table creation
         String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
-                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +  // Auto ID
                 COL_NAME + " TEXT, " +
                 COL_DESCRIPTION + " TEXT, " +
                 COL_IMAGE + " TEXT, " +
@@ -34,6 +38,7 @@ public class BagDatabaseHelper_si extends SQLiteOpenHelper {
                 COL_PRICE + " TEXT)";
         db.execSQL(createTable);
 
+        // Insert initial localized Sinhala data
         db.execSQL("INSERT INTO " + TABLE_NAME + " (" +
                 COL_NAME + ", " + COL_DESCRIPTION + ", " + COL_IMAGE + ", " + COL_MEASUREMENTS + ", " + COL_CAPACITY + ", " + COL_PRICE + ") VALUES " +
 

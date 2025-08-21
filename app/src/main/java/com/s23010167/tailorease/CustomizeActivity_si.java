@@ -19,7 +19,7 @@ public class CustomizeActivity_si extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // 👉 Apply Sinhala locale before anything else
+        // Apply Sinhala locale before anything else
         Locale locale = new Locale("si");
         Locale.setDefault(locale);
         Configuration config = new Configuration();
@@ -31,7 +31,7 @@ public class CustomizeActivity_si extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.si_activity_customize);
+        setContentView(R.layout.si_activity_customize); // Load Sinhala layout
 
         // UI references
         Button btnOrder = findViewById(R.id.btnOrder);
@@ -46,14 +46,16 @@ public class CustomizeActivity_si extends AppCompatActivity {
 
         DatabaseHelper_si dbHelper = new DatabaseHelper_si(this);
 
-        // 👉 Order button - dial number
+        // Order button - dial number
         btnOrder.setOnClickListener(v -> {
+            // Get selected gender
             String gender = "";
             int selectedGenderId = genderRadioGroup.getCheckedRadioButtonId();
             if (selectedGenderId == R.id.radioMale) gender = "පුරුෂ";
             else if (selectedGenderId == R.id.radioFemale) gender = "ස්ත්‍රී";
             else if (selectedGenderId == R.id.radioKids) gender = "ළමුන්";
 
+            // Get selected size
             String size = "";
             int selectedSizeId = sizeRadioGroup.getCheckedRadioButtonId();
             if (selectedSizeId == R.id.radioSmall) size = "කුඩා";
@@ -62,16 +64,19 @@ public class CustomizeActivity_si extends AppCompatActivity {
             else if (selectedSizeId == R.id.radioXL) size = "XL";
             else if (selectedSizeId == R.id.radioXXL) size = "XXL";
 
+            // Get clothing type and material (in Sinhala)
             String clothingType = clothingTypeSpinner.getSelectedItem().toString();
             String material = materialSpinner.getSelectedItem().toString();
 
+            // Open phone dialer with TailorEase number
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:+94740224207"));
             startActivity(intent);
         });
 
-        // 💰 Calculate Price Button
+        // Calculate Price Button
         btnCalculate.setOnClickListener(v -> {
+            // Get selections
             String gender = "";
             int selectedGenderId = genderRadioGroup.getCheckedRadioButtonId();
             if (selectedGenderId == R.id.radioMale) gender = "පුරුෂ";
@@ -89,8 +94,10 @@ public class CustomizeActivity_si extends AppCompatActivity {
             String type = clothingTypeSpinner.getSelectedItem().toString();
             String material = materialSpinner.getSelectedItem().toString();
 
+            // Fetch price from Sinhala database
             int price = dbHelper.getPrice(gender, type, size, material);
 
+            // Update priceTextView
             if (price != -1) {
                 priceTextView.setText("ඇස්තමේන්තු මිල: රු. " + price);
             } else {
@@ -98,7 +105,7 @@ public class CustomizeActivity_si extends AppCompatActivity {
             }
         });
 
-        // 👉 Open Camera Button
+        // Open Camera Button
         btnOpenCamera.setOnClickListener(v -> {
             Intent intent = new Intent(CustomizeActivity_si.this, CameraActivity_si.class);
             startActivity(intent);

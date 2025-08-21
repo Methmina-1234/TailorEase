@@ -2,17 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Declares that the app can use the device camera, but it’s not mandatory -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
 
+    <!-- Permissions required for network and location features -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <!-- Permissions for biometric and fingerprint authentication -->
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
 
+    <!-- Permissions for camera and external storage (storage permission limited to Android 9 / SDK 28) -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
@@ -31,10 +35,12 @@
         android:theme="@style/Theme.TailorEase"
         tools:targetApi="31">
 
+        <!-- Google Maps API key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBKmrx10-AQnuN8zt74GbzxbHwt0UcGiz8" />
 
+        <!-- Splash screen (launcher activity) -->
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -46,6 +52,7 @@
             </intent-filter>
         </activity>
 
+        <!-- Activities (English version) -->
         <activity android:name=".MainActivity"/>
         <activity android:name=".LoginScreen"/>
         <activity android:name=".LoginActivity"/>
@@ -60,6 +67,7 @@
         <activity android:name=".OrderActivity" />
         <activity android:name=".CameraActivity" />
 
+        <!-- FileProvider for sharing images (camera/photo feature) -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -70,6 +78,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!-- Clothing category activities -->
         <activity android:name=".TrousersActivity" />
         <activity android:name=".TShirtActivity" />
         <activity android:name=".LadyDressActivity" />
@@ -77,7 +86,7 @@
         <activity android:name=".KidDressActivity" />
         <activity android:name=".BagActivity" />
 
-
+        <!-- Sinhala version activities -->
         <activity android:name=".LoginScreen_si"/>
         <activity android:name=".LoginActivity_si"/>
         <activity android:name=".RegisterActivity_si"/>
@@ -90,6 +99,7 @@
         <activity android:name=".OrderActivity_si" />
         <activity android:name=".CameraActivity_si" />
 
+        <!-- Clothing category activities in Sinhala -->
         <activity android:name=".TrousersActivity_si" />
         <activity android:name=".TShirtActivity_si" />
         <activity android:name=".LadyDressActivity_si" />

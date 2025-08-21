@@ -6,33 +6,37 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class TrousersDatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "trousers.db";
-    private static final int DATABASE_VERSION = 3; // ⬅️ Incremented for schema change
+    // Database constants
+    private static final String DATABASE_NAME = "trousers.db"; // DB file name
+    private static final int DATABASE_VERSION = 3; // Incremented for schema change
 
+    // Table and column names
     public static final String TABLE_NAME = "trousers";
     public static final String COL_ID = "id";
     public static final String COL_NAME = "name";
     public static final String COL_DESCRIPTION = "description";
     public static final String COL_IMAGE = "image";
     public static final String COL_MEASUREMENTS = "measurements";
-    public static final String COL_PRICE = "price"; // ⬅️ New column
+    public static final String COL_PRICE = "price"; // ️ New column for price
 
+    // Constructor
     public TrousersDatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION); // Call SQLiteOpenHelper constructor
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // SQL statement to create trousers table with price column
         String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_NAME + " TEXT, " +
                 COL_DESCRIPTION + " TEXT, " +
                 COL_IMAGE + " TEXT, " +
                 COL_MEASUREMENTS + " TEXT, " +
-                COL_PRICE + " TEXT)"; // ⬅️ Include price
-        db.execSQL(createTable);
+                COL_PRICE + " TEXT)"; // Include price
+        db.execSQL(createTable); // Execute table creation
 
-        // Insert sample trousers with price
+        // Insert sample trousers data with price
         db.execSQL("INSERT INTO " + TABLE_NAME + " (" +
                 COL_NAME + ", " + COL_DESCRIPTION + ", " + COL_IMAGE + ", " + COL_MEASUREMENTS + ", " + COL_PRICE + ") VALUES " +
 
@@ -47,7 +51,9 @@ public class TrousersDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop the old table if it exists
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        // Recreate the table and sample data
         onCreate(db);
     }
 }

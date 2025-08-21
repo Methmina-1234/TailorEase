@@ -6,22 +6,24 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class MaterialDatabaseHelper_si extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "materials_si.db";
-    public static final int DATABASE_VERSION = 1;
-    public static final String TABLE_NAME = "materials";
-    public static final String COL_ID = "id";
-    public static final String COL_NAME = "name";
-    public static final String COL_DESCRIPTION = "description";
-    public static final String COL_IMAGE = "image";
-    public static final String COL_URL = "url";
-    public static final String COL_PRICE_INCREASE = "price_increase";
+    // Database details
+    public static final String DATABASE_NAME = "materials_si.db"; // Sinhala version of the materials database
+    public static final int DATABASE_VERSION = 1; // Starting version
+    public static final String TABLE_NAME = "materials"; // Table name
+    public static final String COL_ID = "id"; // Primary key
+    public static final String COL_NAME = "name"; // Material name in Sinhala
+    public static final String COL_DESCRIPTION = "description"; // Description in Sinhala
+    public static final String COL_IMAGE = "image"; // Drawable resource name
+    public static final String COL_URL = "url"; // External info link
+    public static final String COL_PRICE_INCREASE = "price_increase"; // Price increment for this material
 
     public MaterialDatabaseHelper_si(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION); // Initialize SQLiteOpenHelper
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Create materials table
         String CREATE_TABLE =
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -32,7 +34,7 @@ public class MaterialDatabaseHelper_si extends SQLiteOpenHelper {
                         COL_PRICE_INCREASE + " REAL)";
         db.execSQL(CREATE_TABLE);
 
-        // Insert Sinhala material data (example)
+        // Insert sample Sinhala material data with price increases
         db.execSQL("INSERT INTO " + TABLE_NAME + " (" +
                 COL_NAME + ", " + COL_DESCRIPTION + ", " + COL_IMAGE + ", " + COL_URL + ", " + COL_PRICE_INCREASE + ") VALUES " +
 
@@ -47,6 +49,7 @@ public class MaterialDatabaseHelper_si extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop table and recreate for upgrade (simple migration)
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }

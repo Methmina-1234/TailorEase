@@ -20,8 +20,8 @@ public class OrderActivity extends AppCompatActivity {
 
     private static final String TAG = "OrderActivity";
 
-    private LinearLayout orderContainer;
-    private OrdersDatabaseHelper ordersDb;
+    private LinearLayout orderContainer; // Container for dynamically added order items
+    private OrdersDatabaseHelper ordersDb; // SQLite database helper for orders
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,25 +31,29 @@ public class OrderActivity extends AppCompatActivity {
         orderContainer = findViewById(R.id.orderContainer);
         ordersDb = new OrdersDatabaseHelper(this);
 
-        loadOrders();
+        loadOrders(); // Load orders from the database
     }
 
     private void loadOrders() {
         SQLiteDatabase db = ordersDb.getReadableDatabase();
         Cursor cursor = null;
         try {
+            // Query all orders from the database
             cursor = db.rawQuery("SELECT * FROM " + OrdersDatabaseHelper.TABLE_NAME, null);
 
             if (cursor != null && cursor.moveToFirst()) {
                 do {
+                    // Get order details from the cursor
                     int orderId = cursor.getInt(cursor.getColumnIndexOrThrow(OrdersDatabaseHelper.COL_ID));
                     String name = cursor.getString(cursor.getColumnIndexOrThrow(OrdersDatabaseHelper.COL_NAME));
                     String description = cursor.getString(cursor.getColumnIndexOrThrow(OrdersDatabaseHelper.COL_DESCRIPTION));
                     String imageResName = cursor.getString(cursor.getColumnIndexOrThrow(OrdersDatabaseHelper.COL_IMAGE));
 
+                    // Get drawable resource ID from name
                     int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
                     if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;
 
+                    // Inflate order box layout
                     View orderBox = LayoutInflater.from(this).inflate(R.layout.order_box, orderContainer, false);
 
                     ImageView image = orderBox.findViewById(R.id.imageViewOrder);
@@ -58,12 +62,14 @@ public class OrderActivity extends AppCompatActivity {
                     Button orderNowBtn = orderBox.findViewById(R.id.buttonOrderNow);
                     Button cancelBtn = orderBox.findViewById(R.id.buttonCancel);
 
+                    // Set values to UI elements
                     image.setImageResource(imageResId);
                     title.setText(name);
                     desc.setText(description);
 
+                    // Order now button opens WhatsApp with pre-filled message
                     orderNowBtn.setOnClickListener(v -> {
-                        String phoneNumber = "94740224207"; // WhatsApp number without "+" sign
+                        String phoneNumber = "94740224207"; // WhatsApp number without "+"
                         String message = "👋 Hello TailorEase Team,\n\n" +
                                 "I'd like to place an order with the following details:\n\n" +
                                 "🧵 *Product*: " + name + "\n" +
@@ -75,6 +81,7 @@ public class OrderActivity extends AppCompatActivity {
                         openWhatsApp(phoneNumber, message);
                     });
 
+                    // Cancel button deletes order from database and removes the view
                     cancelBtn.setOnClickListener(v -> {
                         SQLiteDatabase writableDb = ordersDb.getWritableDatabase();
                         int rowsDeleted = writableDb.delete(OrdersDatabaseHelper.TABLE_NAME,
@@ -90,6 +97,7 @@ public class OrderActivity extends AppCompatActivity {
                         }
                     });
 
+                    // Add order box to the container
                     orderContainer.addView(orderBox);
 
                 } while (cursor.moveToNext());
@@ -105,6 +113,7 @@ public class OrderActivity extends AppCompatActivity {
         }
     }
 
+    // Open WhatsApp with a pre-filled message
     private void openWhatsApp(String phoneNumber, String message) {
         try {
             String url = "https://api.whatsapp.com/send?phone=" + phoneNumber + "&text=" + Uri.encode(message);

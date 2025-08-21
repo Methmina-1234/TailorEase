@@ -10,7 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity_si extends AppCompatActivity {
 
+    // UI Elements
     ImageButton imageButton1, imageButton2, imageButton3, imageButton4, imageButton5, imageButton6;
+
+    // Flag to track if the current user is a guest
     private boolean isGuestUser = false;
 
     @Override
@@ -18,6 +21,7 @@ public class HomeActivity_si extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.si_activity_home);
 
+        // Initialize ImageButtons
         imageButton1 = findViewById(R.id.imageButton1); // Customize
         imageButton2 = findViewById(R.id.imageButton2); // Readymade
         imageButton3 = findViewById(R.id.imageButton3); // Contact
@@ -25,7 +29,8 @@ public class HomeActivity_si extends AppCompatActivity {
         imageButton5 = findViewById(R.id.imageButton5); // Orders
         imageButton6 = findViewById(R.id.imageButton6); // About
 
-        // Set guest flag
+        // Guest User Check
+        // Get user type from Intent extras. If "guest", restrict access.
         String userType = getIntent().getStringExtra("user_type");
         isGuestUser = "guest".equals(userType);
 
@@ -33,8 +38,10 @@ public class HomeActivity_si extends AppCompatActivity {
             disableRestrictedFeatures();
         }
 
+        // Button Click Listeners
+        // Customize feature
         imageButton1.setOnClickListener(view -> {
-            if (checkGuestRestriction("සකසන්න")) return;
+            if (checkGuestRestriction("සකසන්න")) return; // Block for guests
             startActivity(new Intent(HomeActivity_si.this, CustomizeActivity_si.class));
         });
 
@@ -43,7 +50,7 @@ public class HomeActivity_si extends AppCompatActivity {
         });
 
         imageButton3.setOnClickListener(view -> {
-            if (checkGuestRestriction("සම්බන්ධ වන්න")) return;
+            if (checkGuestRestriction("සම්බන්ධ වන්න")) return; // Block for guests
             startActivity(new Intent(HomeActivity_si.this, ContactActivity_si.class));
         });
 
@@ -52,23 +59,26 @@ public class HomeActivity_si extends AppCompatActivity {
         });
 
         imageButton5.setOnClickListener(view -> {
-            if (checkGuestRestriction("ඇනවුම්")) return;
+            if (checkGuestRestriction("ඇනවුම්")) return; // Block for guests
             startActivity(new Intent(HomeActivity_si.this, OrderActivity_si.class));
         });
 
+        // About feature (available for all users)
         imageButton6.setOnClickListener(view -> {
             startActivity(new Intent(HomeActivity_si.this, AboutActivity_si.class));
         });
     }
 
+    // Guest Feature Restrictions
     private void disableRestrictedFeatures() {
-        imageButton1.setAlpha(0.5f);
+        // Make restricted buttons semi-transparent and still clickable to show message
+        imageButton1.setAlpha(0.5f); // Customize
         imageButton1.setEnabled(true); // keep clickable to show message
 
-        imageButton3.setAlpha(0.5f);
+        imageButton3.setAlpha(0.5f); // Contact
         imageButton3.setEnabled(true);
 
-        imageButton5.setAlpha(0.5f);
+        imageButton5.setAlpha(0.5f); // Orders
         imageButton5.setEnabled(true);
     }
 

@@ -4,23 +4,28 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+// Database helper class for managing Lady Dress data
 public class LadyDressDatabaseHelper extends SQLiteOpenHelper {
 
+    // Database file name and version
     private static final String DATABASE_NAME = "ladydress.db";
-    private static final int DATABASE_VERSION = 2; // ⬅️ Updated version
+    private static final int DATABASE_VERSION = 2; // Increment when schema changes
 
+    // Table and column names
     public static final String TABLE_NAME = "ladydress";
-    public static final String COL_ID = "id";
-    public static final String COL_NAME = "name";
-    public static final String COL_DESCRIPTION = "description";
-    public static final String COL_IMAGE = "image";
-    public static final String COL_MEASUREMENTS = "measurements";
-    public static final String COL_PRICE = "price"; // ⬅️ New column
+    public static final String COL_ID = "id"; // Primary Key
+    public static final String COL_NAME = "name"; // Dress name
+    public static final String COL_DESCRIPTION = "description"; // Dress description
+    public static final String COL_IMAGE = "image"; // Drawable resource name
+    public static final String COL_MEASUREMENTS = "measurements"; // Available sizes
+    public static final String COL_PRICE = "price"; // Price range
 
+    // Constructor
     public LadyDressDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // Called only once when the database is created
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
@@ -32,6 +37,7 @@ public class LadyDressDatabaseHelper extends SQLiteOpenHelper {
                 COL_PRICE + " TEXT)";
         db.execSQL(createTable);
 
+        // Insert initial sample data
         db.execSQL("INSERT INTO " + TABLE_NAME + " (" +
                 COL_NAME + ", " + COL_DESCRIPTION + ", " + COL_IMAGE + ", " + COL_MEASUREMENTS + ", " + COL_PRICE + ") VALUES " +
 
@@ -47,8 +53,10 @@ public class LadyDressDatabaseHelper extends SQLiteOpenHelper {
                 "('Sundress', 'Lightweight and colorful sundress for warm days.', 'pic_ladydress10', 'Sizes: XS, S, M', '$22 - $34')");
     }
 
+    // Called when database version changes (e.g., if DATABASE_VERSION is updated)
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop the old table and recreate it
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }

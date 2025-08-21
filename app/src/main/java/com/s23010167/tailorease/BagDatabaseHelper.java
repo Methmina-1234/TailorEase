@@ -6,34 +6,39 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BagDatabaseHelper extends SQLiteOpenHelper {
 
+    // Database file name and version
     private static final String DATABASE_NAME = "bags.db";
-    private static final int DATABASE_VERSION = 3; // ⬅️ bump version
+    private static final int DATABASE_VERSION = 3; // bumped when schema changed (added price column)
 
+    // Table and column names
     public static final String TABLE_NAME = "bags";
-    public static final String COL_ID = "id";
-    public static final String COL_NAME = "name";
-    public static final String COL_DESCRIPTION = "description";
-    public static final String COL_IMAGE = "image";
-    public static final String COL_MEASUREMENTS = "measurements";
-    public static final String COL_CAPACITY = "capacity";
-    public static final String COL_PRICE = "price"; // ⬅️ new column
+    public static final String COL_ID = "id";                 // Primary Key
+    public static final String COL_NAME = "name";             // Bag name
+    public static final String COL_DESCRIPTION = "description"; // Bag description
+    public static final String COL_IMAGE = "image";           // Image resource name
+    public static final String COL_MEASUREMENTS = "measurements"; // Size details
+    public static final String COL_CAPACITY = "capacity";     // Storage capacity
+    public static final String COL_PRICE = "price";           // Price (new column)
 
+    // Constructor - passes DB name and version to SQLiteOpenHelper
     public BagDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // SQL query to create the bags table
         String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
-                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // auto-increment ID
                 COL_NAME + " TEXT, " +
                 COL_DESCRIPTION + " TEXT, " +
                 COL_IMAGE + " TEXT, " +
                 COL_MEASUREMENTS + " TEXT, " +
                 COL_CAPACITY + " TEXT, " +
-                COL_PRICE + " TEXT)";
+                COL_PRICE + " TEXT)"; // Added price column
         db.execSQL(createTable);
 
+        // Insert sample bag items into the table
         db.execSQL("INSERT INTO " + TABLE_NAME + " (" +
                 COL_NAME + ", " + COL_DESCRIPTION + ", " + COL_IMAGE + ", " + COL_MEASUREMENTS + ", " + COL_CAPACITY + ", " + COL_PRICE + ") VALUES " +
 
@@ -51,7 +56,9 @@ public class BagDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop old table if it exists
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        // Recreate the table
         onCreate(db);
     }
 }

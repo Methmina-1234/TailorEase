@@ -6,16 +6,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BlazerDatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "blazers.db";
-    private static final int DATABASE_VERSION = 2; // Bump version to trigger onUpgrade
+    // Database details
+    private static final String DATABASE_NAME = "blazers.db"; // Database file name
+    private static final int DATABASE_VERSION = 2; // Increment version if schema changes
 
+    // Table & column names
     public static final String TABLE_NAME = "blazers";
-    public static final String COL_ID = "id";
-    public static final String COL_NAME = "name";
-    public static final String COL_DESCRIPTION = "description";
-    public static final String COL_IMAGE = "image";
-    public static final String COL_MEASUREMENTS = "measurements";
-    public static final String COL_PRICE = "price"; // ⬅️ New column
+    public static final String COL_ID = "id";                 // Primary key
+    public static final String COL_NAME = "name";             // Blazer name/title
+    public static final String COL_DESCRIPTION = "description"; // Blazer description
+    public static final String COL_IMAGE = "image";           // Image resource name (drawable)
+    public static final String COL_MEASUREMENTS = "measurements"; // Size / measurements info
+    public static final String COL_PRICE = "price";           // Blazer price (as text for now)
 
     public BlazerDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,6 +34,7 @@ public class BlazerDatabaseHelper extends SQLiteOpenHelper {
                 COL_PRICE + " TEXT)";
         db.execSQL(createTable);
 
+        // Insert initial blazer data into the table
         db.execSQL("INSERT INTO " + TABLE_NAME + " (" +
                 COL_NAME + ", " + COL_DESCRIPTION + ", " + COL_IMAGE + ", " + COL_MEASUREMENTS + ", " + COL_PRICE + ") VALUES " +
 
@@ -49,7 +52,10 @@ public class BlazerDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop old table if it exists
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+
+        // Recreate the table and re-insert sample data
         onCreate(db);
     }
 }

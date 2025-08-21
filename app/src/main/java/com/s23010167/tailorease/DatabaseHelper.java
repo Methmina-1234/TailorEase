@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    // DB config
+    // DB configuration
     private static final String DATABASE_NAME = "TailorEase.db";
     private static final int DATABASE_VERSION = 3; // ⬅ bumped to 3 to ensure upgrade triggers
 
@@ -28,10 +28,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_MATERIAL = "Material";
     public static final String COL_PRICE = "Price";
 
+    // Constructor
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // Create Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Create users table
@@ -86,6 +88,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
     }
 
+    // Handle Database Upgrade
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Add fingerprint column if missing
@@ -105,7 +108,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    // 👤 User Methods
+    // User Methods
+    // Insert a new user into the database
     public boolean insertUser(String username, String email, String password, boolean useFingerprint) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -114,9 +118,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_PASSWORD, password);
         values.put(COL_USE_FINGERPRINT, useFingerprint ? 1 : 0);
         long result = db.insert(TABLE_USERS, null, values);
-        return result != -1;
+        return result != -1; // Return true if insert successful
     }
 
+    // Check if a username or email already exists
     public boolean userExists(String username, String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(
@@ -127,6 +132,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return exists;
     }
 
+    // Validate username and password
     public boolean checkUser(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(
@@ -137,6 +143,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return valid;
     }
 
+    // Check if fingerprint login is enabled for a user
     public boolean isFingerprintEnabled(String username) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(
@@ -150,7 +157,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return enabled;
     }
 
-    // 🧵 Clothing Price Lookup
+    // Clothing Price Lookup
     public int getPrice(String gender, String type, String size, String material) {
         int price = -1;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -164,13 +171,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     new String[]{gender, type, size, material});
 
             if (cursor != null && cursor.moveToFirst()) {
-                price = cursor.getInt(0);
+                price = cursor.getInt(0); // Get price from database
             }
         } finally {
             if (cursor != null) cursor.close();
         }
 
-        return price;
+        return price; // Returns -1 if not found
     }
 
 

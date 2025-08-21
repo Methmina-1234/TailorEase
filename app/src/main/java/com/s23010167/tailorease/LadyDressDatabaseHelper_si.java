@@ -6,23 +6,27 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class LadyDressDatabaseHelper_si extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "ladydress_si.db";
-    private static final int DATABASE_VERSION = 2; // ⬅️ Updated version
+    // Database configuration
+    private static final String DATABASE_NAME = "ladydress_si.db"; // Database file name
+    private static final int DATABASE_VERSION = 2; // Version number (increment if schema changes)
 
+    // Table and column names
     public static final String TABLE_NAME = "ladydress";
-    public static final String COL_ID = "id";
-    public static final String COL_NAME = "name";
-    public static final String COL_DESCRIPTION = "description";
-    public static final String COL_IMAGE = "image";
-    public static final String COL_MEASUREMENTS = "measurements";
-    public static final String COL_PRICE = "price"; // ⬅️ New column
+    public static final String COL_ID = "id";              // Primary Key
+    public static final String COL_NAME = "name";          // Dress name
+    public static final String COL_DESCRIPTION = "description"; // Description in Sinhala
+    public static final String COL_IMAGE = "image";        // Image resource name
+    public static final String COL_MEASUREMENTS = "measurements"; // Size info
+    public static final String COL_PRICE = "price";        // Price in Sinhala format
 
+    // Constructor
     public LadyDressDatabaseHelper_si(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // SQL query to create the table
         String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
                 COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COL_NAME + " TEXT, " +
@@ -32,6 +36,7 @@ public class LadyDressDatabaseHelper_si extends SQLiteOpenHelper {
                 COL_PRICE + " TEXT)";
         db.execSQL(createTable);
 
+        // Insert sample lady dress items in Sinhala
         db.execSQL("INSERT INTO " + TABLE_NAME + " (" +
                 COL_NAME + ", " + COL_DESCRIPTION + ", " + COL_IMAGE + ", " + COL_MEASUREMENTS + ", " + COL_PRICE + ") VALUES " +
 
@@ -50,7 +55,8 @@ public class LadyDressDatabaseHelper_si extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Remove existing table if schema changes
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
+        onCreate(db); // Recreate the table
     }
 }

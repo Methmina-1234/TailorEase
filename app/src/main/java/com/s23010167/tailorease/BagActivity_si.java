@@ -14,30 +14,40 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class BagActivity_si extends AppCompatActivity {
 
+    // UI container for dynamically added bag items
     private LinearLayout itemsContainer;
+
+    // Sinhala database helpers
     private BagDatabaseHelper_si dbHelper;
     private OrdersDatabaseHelper_si ordersDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.si_activity_bag);
+        setContentView(R.layout.si_activity_bag); //Sinhala layout
 
+        // Initialize DB helpers
         itemsContainer = findViewById(R.id.itemsContainer);
         dbHelper = new BagDatabaseHelper_si(this);
         ordersDbHelper = new OrdersDatabaseHelper_si(this);
 
+        // Load and display bag items
         loadBags();
     }
 
     private void loadBags() {
+        // Remove any previously loaded items
         itemsContainer.removeAllViews();
 
+        // Open DB in read mode
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        // Query all bag records
         Cursor cursor = db.rawQuery("SELECT * FROM " + BagDatabaseHelper_si.TABLE_NAME, null);
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
+                // Extract fields from DB
                 String name = cursor.getString(cursor.getColumnIndexOrThrow(BagDatabaseHelper_si.COL_NAME));
                 String description = cursor.getString(cursor.getColumnIndexOrThrow(BagDatabaseHelper_si.COL_DESCRIPTION));
                 String imageResName = cursor.getString(cursor.getColumnIndexOrThrow(BagDatabaseHelper_si.COL_IMAGE));
@@ -45,16 +55,20 @@ public class BagActivity_si extends AppCompatActivity {
                 String capacity = cursor.getString(cursor.getColumnIndexOrThrow(BagDatabaseHelper_si.COL_CAPACITY));
                 String price = cursor.getString(cursor.getColumnIndexOrThrow(BagDatabaseHelper_si.COL_PRICE)); // New
 
+                // Find image by resource name (fallback if missing)
                 int imageResId = getResources().getIdentifier(imageResName, "drawable", getPackageName());
                 if (imageResId == 0) imageResId = android.R.drawable.ic_menu_report_image;
 
+                // Inflate Sinhala version of readymade_box layout
                 View itemBox = LayoutInflater.from(this).inflate(R.layout.si_readymade_box, itemsContainer, false);
 
+                // Find UI components inside the box
                 ImageView image = itemBox.findViewById(R.id.imageView);
                 TextView title = itemBox.findViewById(R.id.textViewTitle);
                 TextView desc = itemBox.findViewById(R.id.textViewDescription);
                 View addToCartBtn = itemBox.findViewById(R.id.buttonAddToCart);
 
+                // Fill in values
                 image.setImageResource(imageResId);
                 title.setText(name);
                 desc.setText(
@@ -63,21 +77,25 @@ public class BagActivity_si extends AppCompatActivity {
                                 "මිල: " + (price != null ? price : "නැත")
                 );
 
+                // Handle Add to Cart button
                 addToCartBtn.setOnClickListener(v -> {
                     long id = ordersDbHelper.addOrder(name, description, imageResName, measurements, price);
                     if (id != -1) {
+                        // Success Toast in Sinhala
                         Toast.makeText(this, name + " කරත්තයට එකතු කරන ලදී.\nමිනුම්: " + measurements + "\nමිල: " + price, Toast.LENGTH_SHORT).show();
                     } else {
+                        // Failure Toast in Sinhala
                         Toast.makeText(this, name + " කරත්තයට එකතු කිරීමට අසමත් විය!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
+                // Add item box to container
                 itemsContainer.addView(itemBox);
 
             } while (cursor.moveToNext());
 
-            cursor.close();
+            cursor.close(); // Close cursor to free resources
         }
-        db.close();
+        db.close(); // Close DB
     }
 }

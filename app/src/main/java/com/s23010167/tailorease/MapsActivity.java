@@ -28,53 +28,54 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private static final String TAG = "MapsActivity";
 
-    private GoogleMap mMap;
-    private EditText editTextSearch;
-    private Button buttonSearch;
+    private GoogleMap mMap; // Map object
+    private EditText editTextSearch; // Input field for location search
+    private Button buttonSearch; // Button to trigger search
 
-    private final LatLng myShopLocation = new LatLng(7.203265, 79.870508);
-    private FusedLocationProviderClient fusedLocationClient;
-    private Location currentLocation;
+    private final LatLng myShopLocation = new LatLng(7.203265, 79.870508); // Tailor shop location
+    private FusedLocationProviderClient fusedLocationClient; // For live location updates
+    private Location currentLocation; // Stores user's current location
 
-    private Polyline liveLocationPolyline;
-    private Polyline searchLocationPolyline;
+    private Polyline liveLocationPolyline; // Green polyline from user to shop
+    private Polyline searchLocationPolyline; // Blue polyline from searched location to shop
 
-    private Marker liveLocationMarker;
-    private Marker searchLocationMarker;
-    private Marker shopMarker;
+    private Marker liveLocationMarker; // Marker for live location
+    private Marker searchLocationMarker; // Marker for searched location
+    private Marker shopMarker; // Marker for shop
 
-    private static final int LOCATION_PERMISSION_REQUEST = 1001;
+    private static final int LOCATION_PERMISSION_REQUEST = 1001; // Request code for permissions
 
-    private LocationRequest locationRequest;
-    private LocationCallback locationCallback;
+    private LocationRequest locationRequest; // Settings for live location updates
+    private LocationCallback locationCallback; // Callback for receiving live location updates
 
-    // Store last searched LatLng for keeping search marker and line
-    private LatLng lastSearchedLatLng = null;
+    private LatLng lastSearchedLatLng = null; // Store last searched location
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        // Bind views
         editTextSearch = findViewById(R.id.editTextSearch);
         buttonSearch = findViewById(R.id.buttonSearch);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
+        // Initialize map fragment
         SupportMapFragment mapFragment = (SupportMapFragment)
                 getSupportFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
+            mapFragment.getMapAsync(this); // Async callback when map is ready
         } else {
             Log.e(TAG, "Map fragment is null!");
         }
 
-        // LocationRequest setup
+        // Configure location request parameters
         locationRequest = LocationRequest.create();
-        locationRequest.setInterval(5000); // 5 seconds
-        locationRequest.setFastestInterval(2000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000); // Update every 5 seconds
+        locationRequest.setFastestInterval(2000); // Fastest update interval
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY); // High accuracy
 
-        // LocationCallback updates live user location and green polyline
+        // Location callback: updates user marker and polylines
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
@@ -85,7 +86,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     currentLocation = location;
                     LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-                    // Update live location marker
+                    // Add or update live location marker
                     if (liveLocationMarker == null) {
                         liveLocationMarker = mMap.addMarker(new MarkerOptions()
                                 .position(userLatLng)
@@ -95,7 +96,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         liveLocationMarker.setPosition(userLatLng);
                     }
 
-                    // Update live location polyline (green)
+                    // Add or update green polyline from user to shop
                     if (liveLocationPolyline != null) liveLocationPolyline.remove();
                     PolylineOptions liveLineOptions = new PolylineOptions()
                             .add(userLatLng)
@@ -105,9 +106,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             .geodesic(true);
                     liveLocationPolyline = mMap.addPolyline(liveLineOptions);
 
-                    // If search location exists, also draw blue line and marker for search
+                    // If a search location exists, add/update blue line and marker
                     if (lastSearchedLatLng != null) {
-                        // Update or add search location marker
                         if (searchLocationMarker == null) {
                             searchLocationMarker = mMap.addMarker(new MarkerOptions()
                                     .position(lastSearchedLatLng)
@@ -117,7 +117,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             searchLocationMarker.setPosition(lastSearchedLatLng);
                         }
 
-                        // Update or add blue polyline from searched location to shop
                         if (searchLocationPolyline != null) searchLocationPolyline.remove();
                         PolylineOptions searchLineOptions = new PolylineOptions()
                                 .add(lastSearchedLatLng)
@@ -128,29 +127,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         searchLocationPolyline = mMap.addPolyline(searchLineOptions);
                     }
 
-                    // Add shop marker if not added yet
+                    // Add shop marker if not already added
                     if (shopMarker == null) {
                         shopMarker = mMap.addMarker(new MarkerOptions()
                                 .position(myShopLocation)
-                                .title("\uD83D\uDCCD You found us! Welcome to TailorEase \uD83D\uDC4B\uD83E\uDDF5")
+                                .title("📍 You found us! Welcome to TailorEase 👋🧵")
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
                         if (shopMarker != null) shopMarker.showInfoWindow();
                     }
 
-                    // Zoom to show all three markers nicely
+                    // Zoom map to include all markers
                     LatLngBounds.Builder builder = new LatLngBounds.Builder();
                     builder.include(userLatLng);
                     builder.include(myShopLocation);
                     if (lastSearchedLatLng != null) builder.include(lastSearchedLatLng);
 
-                    // Animate camera with padding
                     mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 150));
                 }
             }
         };
 
+        // Search button click
         buttonSearch.setOnClickListener(v -> {
-            searchLocation();
+            searchLocation(); // Perform search
         });
     }
 
@@ -158,6 +157,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
 
+        // Check location permission
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -165,24 +165,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
 
-        mMap.setMyLocationEnabled(true);
+        mMap.setMyLocationEnabled(true); // Enable blue dot
 
         // Add shop marker
         if (shopMarker == null) {
             shopMarker = mMap.addMarker(new MarkerOptions()
                     .position(myShopLocation)
-                    .title("\uD83D\uDCCD You found us! Welcome to TailorEase \uD83D\uDC4B\uD83E\uDDF5")
+                    .title("📍 You found us! Welcome to TailorEase 👋🧵")
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             if (shopMarker != null) shopMarker.showInfoWindow();
         }
 
-        // Move camera initially to shop location with zoom 15
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myShopLocation, 15f));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myShopLocation, 15f)); // Initial zoom
 
-        // Start live location updates
-        startLocationUpdates();
+        startLocationUpdates(); // Begin live location updates
     }
 
+    // Search location using Geocoder
     private void searchLocation() {
         String location = editTextSearch.getText().toString().trim();
         if (location.isEmpty()) {
@@ -197,7 +196,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Address address = addressList.get(0);
                 lastSearchedLatLng = new LatLng(address.getLatitude(), address.getLongitude());
 
-                // Add or update search marker
+                // Add or update marker
                 if (searchLocationMarker == null) {
                     searchLocationMarker = mMap.addMarker(new MarkerOptions()
                             .position(lastSearchedLatLng)
@@ -207,7 +206,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     searchLocationMarker.setPosition(lastSearchedLatLng);
                 }
 
-                // Add or update blue polyline from searched location to shop
+                // Add or update blue polyline
                 if (searchLocationPolyline != null) searchLocationPolyline.remove();
                 PolylineOptions searchLineOptions = new PolylineOptions()
                         .add(lastSearchedLatLng)
@@ -217,11 +216,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         .geodesic(true);
                 searchLocationPolyline = mMap.addPolyline(searchLineOptions);
 
-                // If live location known, keep green line and marker updated (trigger a fake location callback)
+                // Update live location line if available
                 if (currentLocation != null) {
                     locationCallback.onLocationResult(LocationResult.create(Collections.singletonList(currentLocation)));
                 } else {
-                    // Move camera to searched location if live location not available
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastSearchedLatLng, 15f));
                 }
             } else {
@@ -233,6 +231,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    // Request live location updates
     private void startLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -243,10 +242,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
     }
 
+    // Stop live location updates
     private void stopLocationUpdates() {
         fusedLocationClient.removeLocationUpdates(locationCallback);
     }
 
+    // Handle permission results
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
@@ -264,6 +265,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopLocationUpdates();
+        stopLocationUpdates(); // Stop updates when activity destroyed
     }
 }

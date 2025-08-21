@@ -6,32 +6,39 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class KidDressDatabaseHelper_si extends SQLiteOpenHelper {
 
+    // Database name and version
     private static final String DATABASE_NAME = "kiddress_si.db";
-    private static final int DATABASE_VERSION = 2; // incremented to trigger upgrade
+    private static final int DATABASE_VERSION = 2; // Incremented version to force upgrade when schema changes
 
+    // Table and column names
     public static final String TABLE_NAME = "kiddress";
-    public static final String COL_ID = "id";
-    public static final String COL_NAME = "name";
-    public static final String COL_DESCRIPTION = "description";
-    public static final String COL_IMAGE = "image";
-    public static final String COL_MEASUREMENTS = "measurements";
-    public static final String COL_PRICE = "price"; // ⬅️ New price column
+    public static final String COL_ID = "id";               // Primary key
+    public static final String COL_NAME = "name";           // Dress name
+    public static final String COL_DESCRIPTION = "description"; // Description
+    public static final String COL_IMAGE = "image";         // Image resource name
+    public static final String COL_MEASUREMENTS = "measurements"; // Age/size info
+    public static final String COL_PRICE = "price";         // Price of the dress
 
+    // Constructor - creates a new instance of the database helper
     public KidDressDatabaseHelper_si(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Create table SQL query
         String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
-                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + // Auto-increment ID
                 COL_NAME + " TEXT, " +
                 COL_DESCRIPTION + " TEXT, " +
                 COL_IMAGE + " TEXT, " +
                 COL_MEASUREMENTS + " TEXT, " +
                 COL_PRICE + " TEXT)";
+
+        // Execute table creation
         db.execSQL(createTable);
 
+        // Insert some sample dresses into the table
         db.execSQL("INSERT INTO " + TABLE_NAME + " (" +
                 COL_NAME + ", " + COL_DESCRIPTION + ", " + COL_IMAGE + ", " + COL_MEASUREMENTS + ", " + COL_PRICE + ") VALUES " +
 
@@ -50,7 +57,9 @@ public class KidDressDatabaseHelper_si extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop the old table if it exists
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        // Recreate the database
         onCreate(db);
     }
 }

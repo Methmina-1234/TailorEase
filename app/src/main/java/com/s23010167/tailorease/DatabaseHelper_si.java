@@ -7,15 +7,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper_si extends SQLiteOpenHelper {
 
+    // Database Configuration
     private static final String DATABASE_NAME = "TailorEase_SI.db";
     private static final int DATABASE_VERSION = 1;
 
+    // Constructor
     public DatabaseHelper_si(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
+    // Create Tables
     public void onCreate(SQLiteDatabase db) {
+        // Create ReadymadeItems table
         String createTable = "CREATE TABLE ReadymadeItems (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "gender TEXT, " +
@@ -25,7 +29,7 @@ public class DatabaseHelper_si extends SQLiteOpenHelper {
                 "price INTEGER)";
         db.execSQL(createTable);
 
-        // Insert sample data with Sinhala terms
+        // Insert sample clothing items with Sinhala names
         db.execSQL("INSERT INTO ReadymadeItems (gender, clothingType, size, material, price) VALUES " +
                 "('පුරුෂ', 'ටී-ශර්ට්', 'කුඩා', 'කපු රෙදි', 1300), " +
                 "('පුරුෂ', 'ටී-ශර්ට්', 'විශාල', 'කපු රෙදි', 1600), " +
@@ -50,12 +54,15 @@ public class DatabaseHelper_si extends SQLiteOpenHelper {
 
     }
 
+    // Upgrade Database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop the table if it exists and recreate it
         db.execSQL("DROP TABLE IF EXISTS ReadymadeItems");
         onCreate(db);
     }
 
+    // Get Price Method
     public int getPrice(String gender, String clothingType, String size, String material) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT price FROM ReadymadeItems WHERE gender = ? AND clothingType = ? AND size = ? AND material = ?",
@@ -66,7 +73,7 @@ public class DatabaseHelper_si extends SQLiteOpenHelper {
             return price;
         } else {
             cursor.close();
-            return -1;
+            return -1; // Return -1 if no matching item found
         }
     }
 }

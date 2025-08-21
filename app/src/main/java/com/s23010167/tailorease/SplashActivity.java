@@ -1,4 +1,4 @@
-package com.s23010167.tailorease; // This is app's package name
+package com.s23010167.tailorease; // App's package name
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,19 +13,19 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState); // Always call the superclass method
         setContentView(R.layout.activity_splash); // Set the splash screen layout
 
-        // Wait 3 seconds (3000 milliseconds), then open MainActivity
+        // Handler used to delay the transition to the next activity
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Create an Intent to go from SplashActivity to MainActivity
-                Intent inten = new Intent(SplashActivity.this, MainActivity.class);
+                // Create an Intent to navigate from SplashActivity to MainActivity
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
 
                 // Start MainActivity
-                startActivity(inten);
+                startActivity(intent);
 
-                // Finish SplashActivity so it doesn't stay in the back stack
+                // Close SplashActivity so the user cannot return to it with the back button
                 finish();
             }
-        }, 3000); // 3-second delay
+        }, 3000); // Delay of 3000 milliseconds (3 seconds)
     }
 }

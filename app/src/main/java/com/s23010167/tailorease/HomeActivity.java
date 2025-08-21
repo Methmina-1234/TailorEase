@@ -10,7 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
+    // UI Elements
     ImageButton imageButton1, imageButton2, imageButton3, imageButton4, imageButton5, imageButton6;
+
+    // Flag to track if the current user is a guest
     private boolean isGuestUser = false;
 
     @Override
@@ -18,6 +21,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Initialize ImageButtons
         imageButton1 = findViewById(R.id.imageButton1); // Customize
         imageButton2 = findViewById(R.id.imageButton2); // Readymade
         imageButton3 = findViewById(R.id.imageButton3); // Contact
@@ -25,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         imageButton5 = findViewById(R.id.imageButton5); // Orders
         imageButton6 = findViewById(R.id.imageButton6); // About
 
-        // Set guest flag
+        // Guest User Check
         String userType = getIntent().getStringExtra("user_type");
         isGuestUser = "guest".equals(userType);
 
@@ -33,42 +37,51 @@ public class HomeActivity extends AppCompatActivity {
             disableRestrictedFeatures();
         }
 
+        // Button Click Listeners
+        // Customize feature
         imageButton1.setOnClickListener(view -> {
-            if (checkGuestRestriction("Customize")) return;
+            if (checkGuestRestriction("Customize")) return; // Block for guests
             startActivity(new Intent(HomeActivity.this, CustomizeActivity.class));
         });
 
+        // Readymade feature (available for all users)
         imageButton2.setOnClickListener(view -> {
             startActivity(new Intent(HomeActivity.this, ReadymadeActivity.class));
         });
 
+        // Contact feature
         imageButton3.setOnClickListener(view -> {
-            if (checkGuestRestriction("Contact")) return;
+            if (checkGuestRestriction("Contact")) return; // Block for guests
             startActivity(new Intent(HomeActivity.this, ContactActivity.class));
         });
 
+        // Materials feature (available for all users)
         imageButton4.setOnClickListener(view -> {
             startActivity(new Intent(HomeActivity.this, MaterialActivity.class));
         });
 
+        // Orders feature
         imageButton5.setOnClickListener(view -> {
-            if (checkGuestRestriction("Orders")) return;
+            if (checkGuestRestriction("Orders")) return; // Block for guests
             startActivity(new Intent(HomeActivity.this, OrderActivity.class));
         });
 
+        // About feature (available for all users)
         imageButton6.setOnClickListener(view -> {
             startActivity(new Intent(HomeActivity.this, AboutActivity.class));
         });
     }
 
+    // Guest Feature Restrictions
     private void disableRestrictedFeatures() {
-        imageButton1.setAlpha(0.5f);
+        // Make restricted buttons semi-transparent and still clickable to show message
+        imageButton1.setAlpha(0.5f); // Customize
         imageButton1.setEnabled(true); // keep clickable to show message
 
-        imageButton3.setAlpha(0.5f);
+        imageButton3.setAlpha(0.5f); // Contact
         imageButton3.setEnabled(true);
 
-        imageButton5.setAlpha(0.5f);
+        imageButton5.setAlpha(0.5f); // Orders
         imageButton5.setEnabled(true);
     }
 
